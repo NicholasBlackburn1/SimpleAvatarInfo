@@ -1,4 +1,10 @@
-﻿using MelonLoader;
+﻿
+/**
+ * This is the main mod class for my amazing moddy 
+ * TODO:  change text on the main menu based on waht shit is going to happen
+ * UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/Header_H1/LeftItemContainer/
+ */
+using MelonLoader;
 using UnityEngine;
 using VRC.Core;
 using VRC.UI;
@@ -16,59 +22,55 @@ namespace TestMod
 
     public class TestMod : MelonMod
     {
-        
+       
         
         public override void OnApplicationStart() // Runs after Game Initialization.
         {
             
-            
+            ApiAvatar avt = new VRC.Core.ApiAvatar();
             MelonLogger.Msg("OnApplicationStart");
             MelonLogger.Warning("Starting Simple Data_Pasthrew");
 
             // Displays some info from vrc to show hey this works 
             MelonLogger.Msg("VRC ACCOUNT VERIFIED"+ "= "+  VRC.Core.APIUser.IsAccountVerified);
             MelonLogger.Msg("VRC AVATAR Version" + "= " + VRC.Core.ApiAvatar.VERSION);
-            MelonLogger.Msg("VRC Avatars UwU~" + " =" + VRC.Core.ApiAvatar.localAvatars.ToString());
+            MelonLogger.Msg("VRC Avatar unity version" + " =" + avt.unityVersion);
         }
 
         public override void OnSceneWasLoaded(int buildindex, string sceneName) // Runs when a Scene has Loaded and is passed the Scene's Build Index and Name.
         {
-            MelonLogger.Msg("OnSceneWasLoaded: " + buildindex.ToString() + " | " + sceneName);
             
-
-
 
         }
 
         public override void OnSceneWasInitialized(int buildindex, string sceneName) // Runs when a Scene has Initialized and is passed the Scene's Build Index and Name.
         {
-            MelonLogger.Msg("OnSceneWasInitialized: " + buildindex.ToString() + " | " + sceneName);
-           
-        }
+
+        // this should in thery it should change text
+        
+    }
 
         public override void OnUpdate() // Runs once per frame.
         {
-            MelonLogger.Msg("OnUpdate");
             
            
         }
 
         public override void OnFixedUpdate() // Can run multiple times per frame. Mostly used for Physics.
         {
-            MelonLogger.Msg("OnFixedUpdate");
+            
         }
 
         public override void OnLateUpdate() // Runs once per frame after OnUpdate and OnFixedUpdate have finished.
         {
-            MelonLogger.Msg("OnLateUpdate");
+
         }
 
         public override void OnGUI() // Can run multiple times per frame. Mostly used for Unity's IMGUI.
         {
-            MelonLogger.Msg("OnGUI");
-            
-            
 
+            var text = GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/Header_H1/LeftItemContainer/Text_Title").transform;
+            text.GetComponent<UnityEngine.UI.Text>().text = "UWU what is this modded vrc";
 
 
         }   
