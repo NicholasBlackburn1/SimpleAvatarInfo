@@ -24,14 +24,20 @@ namespace TestMod
             
             MelonLogger.Msg("OnApplicationStart");
             MelonLogger.Warning("Starting Simple Data_Pasthrew");
+
+            // Displays some info from vrc to show hey this works 
             MelonLogger.Msg("VRC ACCOUNT VERIFIED"+ "= "+  VRC.Core.APIUser.IsAccountVerified);
+            MelonLogger.Msg("VRC AVATAR Version" + "= " + VRC.Core.ApiAvatar.VERSION);
+            MelonLogger.Msg("VRC Avatars UwU~" + " =" + VRC.Core.ApiAvatar.localAvatars.ToString());
         }
 
         public override void OnSceneWasLoaded(int buildindex, string sceneName) // Runs when a Scene has Loaded and is passed the Scene's Build Index and Name.
         {
             MelonLogger.Msg("OnSceneWasLoaded: " + buildindex.ToString() + " | " + sceneName);
-
             
+
+
+
         }
 
         public override void OnSceneWasInitialized(int buildindex, string sceneName) // Runs when a Scene has Initialized and is passed the Scene's Build Index and Name.
@@ -60,7 +66,8 @@ namespace TestMod
         public override void OnGUI() // Can run multiple times per frame. Mostly used for Unity's IMGUI.
         {
             MelonLogger.Msg("OnGUI");
-           
+            
+            
 
 
 

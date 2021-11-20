@@ -28,10 +28,12 @@
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Il2Cppmscorlib, Version=3.7.1.6, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="MelonLoader">
       <HintPath>Libs\MelonLoader.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="UnhollowerBaseLib, Version=0.4.16.1, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="UnityEngine, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\VRChat\MelonLoader\Managed\UnityEngine.dll</HintPath>
