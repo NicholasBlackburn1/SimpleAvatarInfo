@@ -32,6 +32,15 @@
     <Reference Include="MelonLoader">
       <HintPath>Libs\MelonLoader.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.CSharp">
+      <HintPath>..\VRChat\MelonLoader\Managed\Mono.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Data.Tds">
+      <HintPath>..\VRChat\MelonLoader\Managed\Mono.Data.Tds.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="UnhollowerBaseLib, Version=0.4.16.1, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="UniTask.TextMeshPro">
@@ -79,8 +88,19 @@
     <Reference Include="VRCLog">
       <HintPath>..\VRChat\MelonLoader\Managed\VRCLog.dll</HintPath>
     </Reference>
+    <Reference Include="VRCSDK2">
+      <HintPath>..\VRChat\MelonLoader\Managed\VRCSDK2.dll</HintPath>
+    </Reference>
+    <Reference Include="VRCSDK3">
+      <HintPath>..\VRChat\MelonLoader\Managed\VRCSDK3.dll</HintPath>
+    </Reference>
+    <Reference Include="VRCSDK3A">
+      <HintPath>..\VRChat\MelonLoader\Managed\VRCSDK3A.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AvatarStuff.cs" />
+    <Compile Include="PlayerStuff.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main.cs" />
   </ItemGroup>
@@ -91,6 +111,9 @@
     <Content Include="UnityEngine.UIElementsModule.xml" />
     <Content Include="UnityEngine.UIModule.dll" />
     <Content Include="UnityEngine.UIModule.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

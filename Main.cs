@@ -5,6 +5,8 @@
  * UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/Header_H1/LeftItemContainer/
  */
 using MelonLoader;
+using Mono.CSharp;
+using System.Collections;
 using UnityEngine;
 using VRC.Core;
 using VRC.UI;
@@ -28,6 +30,9 @@ namespace TestMod
     public class TestMod : MelonMod
     {
         public static GameObject text = new GameObject();
+
+        public const string dataHeader = "Captured Data ->";
+        private AvatarStuff avatarstuff = new AvatarStuff();
         public override void OnApplicationStart() // Runs after Game Initialization.
         {
           
@@ -36,9 +41,11 @@ namespace TestMod
             MelonLogger.Warning("Starting Simple Data_Pasthrew");
 
             // Displays some info from vrc to show hey this works 
-            MelonLogger.Msg("VRC ACCOUNT VERIFIED"+ "= "+  VRC.Core.APIUser.IsAccountVerified);
-            MelonLogger.Msg("VRC AVATAR Version" + "= " + VRC.Core.ApiAvatar.VERSION.ToString());
-            MelonLogger.Msg("VRC Avatar unity version" + " =" + avt.unityVersion);
+            MelonLogger.Msg("VRC ACCOUNT VERIFIED"+ "=> "+  VRC.Core.APIUser.IsAccountVerified);
+            MelonLogger.Msg("VRC AVATAR Version" + "=> " + VRC.Core.ApiAvatar.VERSION.ToString());
+            MelonLogger.Msg("VRC Avatar unity version" + "=> " + avt.unityVersion);
+
+            Vrcguimod();
         }
 
         public override void OnSceneWasLoaded(int buildindex, string sceneName) // Runs when a Scene has Loaded and is passed the Scene's Build Index and Name.
@@ -50,24 +57,12 @@ namespace TestMod
         public override void OnSceneWasInitialized(int buildindex, string sceneName) // Runs when a Scene has Initialized and is passed the Scene's Build Index and Name.
         {
 
-            // this should in thery it should change text
-
-            text = GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/Header_H1/LeftItemContainer/Text_Title");
             
-            while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == true)
-            {
-
-                text.GetComponent<TMPro.TextMeshPro>().text = "UWU what is this modded vrc";
-                MelonLogger.Msg("Changed QuickMenu text");
-
-                MelonLogger.Warning("Set the text stuff to active!");
-            }
-
         }
 
         public override void OnUpdate() // Runs once per frame.
         {
-            text.SetActive(true);
+           
 
         }
 
@@ -107,6 +102,22 @@ namespace TestMod
         public override void BONEWORKS_OnLoadingScreen() // Runs when BONEWORKS shows the Loading Screen. Only runs if the Melon is used in BONEWORKS.
         {
             MelonLogger.Msg("BONEWORKS_OnLoadingScreen");
+        }
+
+        public IEnumerator Vrcguimod()
+        {
+            // this should in thery it should change text
+
+            text = GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/Header_H1/LeftItemContainer/Text_Title");
+
+            while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
+            
+            text.GetComponent<TMPro.TextMeshPro>().text = "UWU what is this modded vrc";
+            MelonLogger.Msg("Changed QuickMenu text");
+    
+            MelonLogger.Warning("Set the text stuff to active!");
+        
+
         }
     }
 }
