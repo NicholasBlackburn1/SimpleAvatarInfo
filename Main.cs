@@ -27,8 +27,7 @@ namespace TestMod
 
     public class TestMod : MelonMod
     {
-        public GameObject text = GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/Header_H1/LeftItemContainer/Text_Title");
-
+        public static GameObject text = new GameObject();
         public override void OnApplicationStart() // Runs after Game Initialization.
         {
           
@@ -38,7 +37,7 @@ namespace TestMod
 
             // Displays some info from vrc to show hey this works 
             MelonLogger.Msg("VRC ACCOUNT VERIFIED"+ "= "+  VRC.Core.APIUser.IsAccountVerified);
-            MelonLogger.Msg("VRC AVATAR Version" + "= " + VRC.Core.ApiAvatar.VERSION);
+            MelonLogger.Msg("VRC AVATAR Version" + "= " + VRC.Core.ApiAvatar.VERSION.ToString());
             MelonLogger.Msg("VRC Avatar unity version" + " =" + avt.unityVersion);
         }
 
@@ -53,17 +52,23 @@ namespace TestMod
 
             // this should in thery it should change text
 
-            while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null)
+            text = GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/Header_H1/LeftItemContainer/Text_Title");
+            
+            while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == true)
             {
-                
+
                 text.GetComponent<TMPro.TextMeshPro>().text = "UWU what is this modded vrc";
                 MelonLogger.Msg("Changed QuickMenu text");
-              
+
+                MelonLogger.Warning("Set the text stuff to active!");
             }
+
         }
 
         public override void OnUpdate() // Runs once per frame.
         {
+            text.SetActive(true);
+
         }
 
         public override void OnFixedUpdate() // Can run multiple times per frame. Mostly used for Physics.
@@ -74,9 +79,8 @@ namespace TestMod
         public override void OnLateUpdate() // Runs once per frame after OnUpdate and OnFixedUpdate have finished.
         {
 
-            text.SetActive(true);
-            MelonLogger.Warning("Set the text stuff to active!");
         }
+
         public override void OnGUI() // Can run multiple times per frame. Mostly used for Unity's IMGUI.
         {
 
