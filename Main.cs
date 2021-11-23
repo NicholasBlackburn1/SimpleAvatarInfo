@@ -33,7 +33,7 @@ namespace TestMod
 
         public const string dataHeader = "Captured Data ->";
         private AvatarStuff avatarstuff = new AvatarStuff();
-        private bool isingui = false;
+
         public override void OnApplicationStart() // Runs after Game Initialization.
         {
 
@@ -46,7 +46,6 @@ namespace TestMod
             MelonLogger.Msg("VRC AVATAR Version" + "=> " + VRC.Core.ApiAvatar.VERSION.ToString());
             MelonLogger.Msg("VRC Avatar unity version" + "=> " + avt.unityVersion);
 
-         
 
 
         }
@@ -59,13 +58,14 @@ namespace TestMod
         public override void OnSceneWasInitialized(int buildindex, string sceneName) // Runs when a Scene has Initialized and is passed the Scene's Build Index and Name.
         {
 
-
+            OnLoadGui();
         }
 
         public override void OnUpdate() // Runs once per frame.
         {
 
-            MelonLoader.MelonCoroutines.Start(Vrcguimod());
+            
+
 
         }
 
@@ -76,7 +76,7 @@ namespace TestMod
 
         public override void OnLateUpdate() // Runs once per frame after OnUpdate and OnFixedUpdate have finished.
         {
-
+            MelonLoader.MelonCoroutines.Start(OnRun());
         }
 
         public override void OnGUI() // Can run multiple times per frame. Mostly used for Unity's IMGUI.
@@ -104,27 +104,24 @@ namespace TestMod
         {
             MelonLogger.Msg("BONEWORKS_OnLoadingScreen");
         }
-
-        public IEnumerator Vrcguimod()
+        // loading for mod 
+        public void OnLoadGui()
         {
-            MelonLogger.Error("Please see this message for sanity");
-            MelonLogger.Msg("running core rutiean...");
-
             // creates and finds the text title object
             Transform text = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/Header_H1/LeftItemContainer/Text_Title");
             MelonLogger.Msg("Gameobj Name ->" + " " + text.name.ToString());
             MelonLogger.Msg("Gameobj Type ->" + " " + text.GetType().ToString());
             MelonLogger.Warning(text.name.ToString() + " " + "is active ->" + " " + text.gameObject.active.ToString());
+             
+        }
 
-
-            text.GetComponent<TMPro.TextMeshPro>().text = "OWO";
-            MelonLogger.Msg("Changed QuickMenu text");
-            MelonLogger.Warning("Set the text stuff to active!");
-
+        public IEnumerator OnRun()
+        {
             // whenever the usermanage face is avctive 
             while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
-            MelonLogger.Warning(text.name.ToString() + " " + "is active ->" + " " + text.gameObject.active.ToString());
-            MelonLogger.Msg("Early ui Done loading...");
+            Transform text = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/Header_H1/LeftItemContainer/Text_Title");
+            text.GetComponent<TMPro.TextMeshProUGUI>().text = "OwO";
+            
         }
     }
 }
