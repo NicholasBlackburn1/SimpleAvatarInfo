@@ -57,8 +57,10 @@ namespace TestMod
 
         public override void OnSceneWasInitialized(int buildindex, string sceneName) // Runs when a Scene has Initialized and is passed the Scene's Build Index and Name.
         {
-
             OnLoadGui();
+            RegisterGuiRuns();
+
+
         }
 
         public override void OnUpdate() // Runs once per frame.
@@ -75,8 +77,9 @@ namespace TestMod
         }
 
         public override void OnLateUpdate() // Runs once per frame after OnUpdate and OnFixedUpdate have finished.
-        {
-            MelonLoader.MelonCoroutines.Start(OnRun());
+        {   
+
+
         }
 
         public override void OnGUI() // Can run multiple times per frame. Mostly used for Unity's IMGUI.
@@ -104,24 +107,41 @@ namespace TestMod
         {
             MelonLogger.Msg("BONEWORKS_OnLoadingScreen");
         }
+
+        // this allows me to easly call information from the game objects im pullign from
+        public void getGameObjInfo(Transform text)
+        {
+            MelonLogger.Msg("Gameobj Name ->" + " " + text.name.ToString());
+            MelonLogger.Msg("Gameobj Type ->" + " " + text.GetType().ToString());
+            MelonLogger.Warning(text.name.ToString() + " " + "is active ->" + " " + text.gameObject.active.ToString());
+        }
         // loading for mod 
         public void OnLoadGui()
         {
             // creates and finds the text title object
             Transform text = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/Header_H1/LeftItemContainer/Text_Title");
-            MelonLogger.Msg("Gameobj Name ->" + " " + text.name.ToString());
-            MelonLogger.Msg("Gameobj Type ->" + " " + text.GetType().ToString());
-            MelonLogger.Warning(text.name.ToString() + " " + "is active ->" + " " + text.gameObject.active.ToString());
-             
+            getGameObjInfo(text);
+              
+            // shows info on the icon 
+            Transform toggle_icon = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/Toggle_SafeMode/Icon").transform;
+            getGameObjInfo(toggle_icon);
+
+            Transform toggle = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/Toggle_SafeMode").transform;
+            getGameObjInfo(toggle);
+
+
         }
 
-        public IEnumerator OnRun()
+        // this holds the running stuff for my vrchat mod
+        public void RegisterGuiRuns()
         {
-            // whenever the usermanage face is avctive 
-            while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
-            Transform text = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/Header_H1/LeftItemContainer/Text_Title");
-            text.GetComponent<TMPro.TextMeshProUGUI>().text = "OwO";
-            
+            GuiStuff gui = new GuiStuff();
+
+            gui.OnMainTitleRun("text UwU~....");
+            //gui.OnSettingsRun();
         }
+
+     
     }
 }
+
