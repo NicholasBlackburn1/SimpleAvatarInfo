@@ -46,8 +46,7 @@ namespace TestMod
             MelonLogger.Msg("VRC AVATAR Version" + "=> " + VRC.Core.ApiAvatar.VERSION.ToString());
             MelonLogger.Msg("VRC Avatar unity version" + "=> " + avt.unityVersion);
 
-
-
+         
 
 
         }
@@ -61,12 +60,13 @@ namespace TestMod
         {
 
 
-
         }
 
         public override void OnUpdate() // Runs once per frame.
         {
+
             MelonLoader.MelonCoroutines.Start(Vrcguimod());
+
         }
 
         public override void OnFixedUpdate() // Can run multiple times per frame. Mostly used for Physics.
@@ -116,25 +116,15 @@ namespace TestMod
             MelonLogger.Msg("Gameobj Type ->" + " " + text.GetType().ToString());
             MelonLogger.Warning(text.name.ToString() + " " + "is active ->" + " " + text.gameObject.active.ToString());
 
-            // runs when the ui manager is ok
-            while (UIManager.field_Private_Static_UIManager_0 == null) yield return null;
-            MelonLogger.Msg("Early ui loading...");
-            MelonLogger.Msg("Wating for next while loop to execute...");
 
+            text.GetComponent<TMPro.TextMeshPro>().text = "OWO";
+            MelonLogger.Msg("Changed QuickMenu text");
+            MelonLogger.Warning("Set the text stuff to active!");
 
             // whenever the usermanage face is avctive 
             while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
             MelonLogger.Warning(text.name.ToString() + " " + "is active ->" + " " + text.gameObject.active.ToString());
             MelonLogger.Msg("Early ui Done loading...");
-
-            MelonLogger.Warning(text.name.ToString() + " " + "is active ->" + " " + text.gameObject.active.ToString());
-            MelonLogger.Warning("Changing mexnu text");
-
-            text.GetComponent<TMPro.TextMeshPro>().text = "OWO";
-            text.gameObject.SetActive(true);
-            MelonLogger.Msg("Changed QuickMenu text");
-
-            MelonLogger.Warning("Set the text stuff to active!");
         }
     }
 }
