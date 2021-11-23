@@ -122,6 +122,8 @@ namespace TestMod
             Transform text = GameObject.Find("UserInterface").transform.Find(Const.MainMenuTitlePath);
             getGameObjInfo(text);
 
+            Transform voice = GameObject.Find("UserInterface").transform.Find(Const.VoiceMenuPath);
+            getGameObjInfo(voice);
 
 
         }
