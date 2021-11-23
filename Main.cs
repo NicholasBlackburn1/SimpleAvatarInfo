@@ -122,8 +122,13 @@ namespace TestMod
             Transform text = GameObject.Find("UserInterface").transform.Find(Const.MainMenuTitlePath);
             getGameObjInfo(text);
 
-            Transform voice = GameObject.Find("UserInterface").transform.Find(Const.VoiceMenuPath);
-            getGameObjInfo(voice);
+            Transform safty = GameObject.Find("UserInterface").transform.Find(Const.toggleSaftyPath);
+            getGameObjInfo(safty);
+
+            Transform wing_left_title = GameObject.Find("UserInterface").transform.Find(Const.Leftwingtitlepath);
+            getGameObjInfo(wing_left_title);
+
+
 
 
         }
@@ -134,6 +139,7 @@ namespace TestMod
             GuiStuff gui = new GuiStuff();
 
             MelonCoroutines.Start(gui.OnMainTitleRun("text UwU~...."));
+            MelonCoroutines.Start(gui.OnLeftWingTitle("text In left wing~...."));
             //gui.OnSettingsRun();
         }
 
