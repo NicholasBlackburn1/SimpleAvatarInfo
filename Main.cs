@@ -24,8 +24,8 @@ namespace TestMod
         public const string Version = "1.0.0"; // Version of the Mod.  (MUST BE SET)
         public const string DownloadLink = null; // Download Link for the Mod.  (Set as null if none)
 
-       
-             
+
+
     }
 
     public class TestMod : MelonMod
@@ -33,6 +33,7 @@ namespace TestMod
 
         public const string dataHeader = "Captured Data ->";
         private AvatarStuff avatarstuff = new AvatarStuff();
+        private bool isingui = false;
         public override void OnApplicationStart() // Runs after Game Initialization.
         {
 
@@ -48,11 +49,11 @@ namespace TestMod
 
 
 
+
         }
 
         public override void OnSceneWasLoaded(int buildindex, string sceneName) // Runs when a Scene has Loaded and is passed the Scene's Build Index and Name.
         {
-
 
         }
 
@@ -65,8 +66,7 @@ namespace TestMod
 
         public override void OnUpdate() // Runs once per frame.
         {
-
-
+            MelonLoader.MelonCoroutines.Start(Vrcguimod());
         }
 
         public override void OnFixedUpdate() // Can run multiple times per frame. Mostly used for Physics.
@@ -76,13 +76,11 @@ namespace TestMod
 
         public override void OnLateUpdate() // Runs once per frame after OnUpdate and OnFixedUpdate have finished.
         {
-            MelonLoader.MelonCoroutines.Start(Vrcguimod());
+
         }
 
         public override void OnGUI() // Can run multiple times per frame. Mostly used for Unity's IMGUI.
         {
-
-
 
         }
 
@@ -112,30 +110,31 @@ namespace TestMod
             MelonLogger.Error("Please see this message for sanity");
             MelonLogger.Msg("running core rutiean...");
 
+            // creates and finds the text title object
             Transform text = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/Header_H1/LeftItemContainer/Text_Title");
             MelonLogger.Msg("Gameobj Name ->" + " " + text.name.ToString());
             MelonLogger.Msg("Gameobj Type ->" + " " + text.GetType().ToString());
-            MelonLogger.Warning(text.name.ToString() + " "+"is active ->" + " " + text.gameObject.active.ToString());
+            MelonLogger.Warning(text.name.ToString() + " " + "is active ->" + " " + text.gameObject.active.ToString());
 
-
+            // runs when the ui manager is ok
             while (UIManager.field_Private_Static_UIManager_0 == null) yield return null;
             MelonLogger.Msg("Early ui loading...");
-
-            if (text.gameObject.active)
-            {
-                MelonLogger.Warning(text.name.ToString() + " " + "is active ->" + " " + text.gameObject.active.ToString());
-                MelonLogger.Msg("Early ui Done loading...");
+            MelonLogger.Msg("Wating for next while loop to execute...");
 
 
-                MelonLogger.Warning("Changing mexnu text");
+            // whenever the usermanage face is avctive 
+            while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
+            MelonLogger.Warning(text.name.ToString() + " " + "is active ->" + " " + text.gameObject.active.ToString());
+            MelonLogger.Msg("Early ui Done loading...");
 
-                text.GetComponent<TMPro.TextMeshPro>().text = "UWU what is this modded vrc";
-                MelonLogger.Msg("Changed QuickMenu text");
+            MelonLogger.Warning(text.name.ToString() + " " + "is active ->" + " " + text.gameObject.active.ToString());
+            MelonLogger.Warning("Changing mexnu text");
 
-                MelonLogger.Warning("Set the text stuff to active!");
-            }
+            text.GetComponent<TMPro.TextMeshPro>().text = "OWO";
+            text.gameObject.SetActive(true);
+            MelonLogger.Msg("Changed QuickMenu text");
 
-
+            MelonLogger.Warning("Set the text stuff to active!");
         }
     }
-    }
+}
