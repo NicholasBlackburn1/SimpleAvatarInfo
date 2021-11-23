@@ -119,15 +119,9 @@ namespace TestMod
         public void OnLoadGui()
         {
             // creates and finds the text title object
-            Transform text = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/Header_H1/LeftItemContainer/Text_Title");
+            Transform text = GameObject.Find("UserInterface").transform.Find(Const.MainMenuTitlePath);
             getGameObjInfo(text);
-              
-            // shows info on the icon 
-            Transform toggle_icon = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/Toggle_SafeMode/Icon").transform;
-            getGameObjInfo(toggle_icon);
 
-            Transform toggle = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/Toggle_SafeMode").transform;
-            getGameObjInfo(toggle);
 
 
         }
@@ -137,7 +131,7 @@ namespace TestMod
         {
             GuiStuff gui = new GuiStuff();
 
-            gui.OnMainTitleRun("text UwU~....");
+            MelonCoroutines.Start(gui.OnMainTitleRun("text UwU~...."));
             //gui.OnSettingsRun();
         }
 

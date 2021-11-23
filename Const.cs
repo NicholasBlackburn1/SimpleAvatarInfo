@@ -10,5 +10,7 @@ namespace TestMod
     {
 
         public const string ModTogglesTitle= "Enable Data Out";
+
+        public const string MainMenuTitlePath = "Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/Header_H1/LeftItemContainer/Text_Title";
     }
 }
