@@ -26,65 +26,65 @@ namespace TestMod
 
        
              
-    }   
+    }
 
     public class TestMod : MelonMod
     {
-    
+
         public const string dataHeader = "Captured Data ->";
         private AvatarStuff avatarstuff = new AvatarStuff();
         public override void OnApplicationStart() // Runs after Game Initialization.
         {
-          
+
             ApiAvatar avt = new VRC.Core.ApiAvatar();
             MelonLogger.Msg("OnApplicationStart");
             MelonLogger.Warning("Starting Simple Data_Pasthrew");
 
             // Displays some info from vrc to show hey this works 
-            MelonLogger.Msg("VRC ACCOUNT VERIFIED"+ "=> "+  VRC.Core.APIUser.IsAccountVerified);
+            MelonLogger.Msg("VRC ACCOUNT VERIFIED" + "=> " + VRC.Core.APIUser.IsAccountVerified);
             MelonLogger.Msg("VRC AVATAR Version" + "=> " + VRC.Core.ApiAvatar.VERSION.ToString());
             MelonLogger.Msg("VRC Avatar unity version" + "=> " + avt.unityVersion);
 
 
-            
+
 
         }
 
         public override void OnSceneWasLoaded(int buildindex, string sceneName) // Runs when a Scene has Loaded and is passed the Scene's Build Index and Name.
         {
-            
+
 
         }
 
         public override void OnSceneWasInitialized(int buildindex, string sceneName) // Runs when a Scene has Initialized and is passed the Scene's Build Index and Name.
         {
 
-           
+
 
         }
 
         public override void OnUpdate() // Runs once per frame.
         {
-            
+
 
         }
 
         public override void OnFixedUpdate() // Can run multiple times per frame. Mostly used for Physics.
         {
-            
+
         }
 
         public override void OnLateUpdate() // Runs once per frame after OnUpdate and OnFixedUpdate have finished.
         {
-
+            MelonLoader.MelonCoroutines.Start(Vrcguimod());
         }
 
         public override void OnGUI() // Can run multiple times per frame. Mostly used for Unity's IMGUI.
         {
 
-          
 
-        }   
+
+        }
 
         public override void OnApplicationQuit() // Runs when the Game is told to Close.
         {
@@ -115,20 +115,27 @@ namespace TestMod
             Transform text = GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/Header_H1/LeftItemContainer/Text_Title");
             MelonLogger.Msg("Gameobj Name ->" + " " + text.name.ToString());
             MelonLogger.Msg("Gameobj Type ->" + " " + text.GetType().ToString());
+            MelonLogger.Warning(text.name.ToString() + " "+"is active ->" + " " + text.gameObject.active.ToString());
 
 
             while (UIManager.field_Private_Static_UIManager_0 == null) yield return null;
             MelonLogger.Msg("Early ui loading...");
 
-            while (GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
+            if (text.gameObject.active)
+            {
+                MelonLogger.Warning(text.name.ToString() + " " + "is active ->" + " " + text.gameObject.active.ToString());
+                MelonLogger.Msg("Early ui Done loading...");
 
 
-            text.GetComponent<TMPro.TextMeshPro>().text = "UWU what is this modded vrc";
-            MelonLogger.Msg("Changed QuickMenu text");
-    
-            MelonLogger.Warning("Set the text stuff to active!");
-        
+                MelonLogger.Warning("Changing mexnu text");
+
+                text.GetComponent<TMPro.TextMeshPro>().text = "UWU what is this modded vrc";
+                MelonLogger.Msg("Changed QuickMenu text");
+
+                MelonLogger.Warning("Set the text stuff to active!");
+            }
+
 
         }
     }
-}
+    }
