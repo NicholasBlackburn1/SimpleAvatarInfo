@@ -59,7 +59,7 @@ namespace TestMod
         public override void OnSceneWasInitialized(int buildindex, string sceneName) // Runs when a Scene has Initialized and is passed the Scene's Build Index and Name.
         {
 
-            MelonLoader.MelonCoroutines.Start(Vrcguimod());
+           
 
         }
 
@@ -120,8 +120,9 @@ namespace TestMod
             while (UIManager.field_Private_Static_UIManager_0 == null) yield return null;
             MelonLogger.Msg("Early ui loading...");
 
-            while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
-            
+            while (GameObject.Find("UserInterface").transform.Find("Canvas_QuickMenu(Clone)/Container/Window/QMParent").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
+
+
             text.GetComponent<TMPro.TextMeshPro>().text = "UWU what is this modded vrc";
             MelonLogger.Msg("Changed QuickMenu text");
     
