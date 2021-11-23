@@ -39,8 +39,39 @@ namespace TestMod
             while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
 
             Transform Main_Menu_title = GameObject.Find("UserInterface").transform.Find(Const.Leftwingtitlepath);
-            Main_Menu_title.GetComponent<TMPro.TextMeshProUGUI>().text = message;
+            Main_Menu_title.GetComponent<TMPro.TextMeshProUGUI>().text = Const.ModTitle;
         }
+
+
+
+        public IEnumerator OnFirstButton()
+        {
+            // whenever the usermanage face is avctive 
+            while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
+
+            Transform Main_Menu_title = GameObject.Find("UserInterface").transform.Find(Const.LeftwingFirstButtonTitle);
+            Main_Menu_title.GetComponent<TMPro.TextMeshProUGUI>().text = Const.ModFirstButton;
+        }
+
+        public IEnumerator OnSecondButton()
+        {
+            // whenever the usermanage face is avctive 
+            while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
+
+            Transform Main_Menu_title = GameObject.Find("UserInterface").transform.Find(Const.LeftwingSecondButtonTitle);
+            Main_Menu_title.GetComponent<TMPro.TextMeshProUGUI>().text = Const.AviInfo;
+        }
+
+        public IEnumerator OnThirdButton()
+        {
+            // whenever the usermanage face is avctive 
+            while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
+
+            Transform Main_Menu_title = GameObject.Find("UserInterface").transform.Find(Const.LeftwingThirdButton);
+            Main_Menu_title.GetComponent<TMPro.TextMeshProUGUI>().text = Const.Graphing;
+        }
+
+
 
 
     }

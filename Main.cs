@@ -140,6 +140,8 @@ namespace TestMod
 
             MelonCoroutines.Start(gui.OnMainTitleRun("text UwU~...."));
             MelonCoroutines.Start(gui.OnLeftWingTitle("text In left wing~...."));
+            MelonCoroutines.Start(gui.OnFirstButton());
+            MelonCoroutines.Start(gui.OnSecondButton());
             //gui.OnSettingsRun();
         }
 
