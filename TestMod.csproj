@@ -121,6 +121,7 @@
   <ItemGroup>
     <Compile Include="AvatarStuff.cs" />
     <Compile Include="Const.cs" />
+    <Compile Include="GuiActions.cs" />
     <Compile Include="GuiStuff.cs" />
     <Compile Include="PlayerStuff.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

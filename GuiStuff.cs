@@ -87,44 +87,22 @@ namespace TestMod
             Transform modinfoButton = GameObject.Find("UserInterface").transform.Find(Const.GUIModButton);
 
             modinfoButton.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
-            modinfoButton.GetComponent<Button>().onClick.AddListener(DumpAvatarInfo());
+            //modinfoButton.GetComponent<Button>().onClick.AddListener();
         }
 
 
-        public Action DumpAvatarInfo()
+        public IEnumerator OnAvatarInfoButtonPress()
         {
-            return new Action(() =>
-            {
-                Transform screens = GameObject.Find("UserInterface").transform.Find("MenuContent/Screens/").transform;
-                PageWorldInfo pageWorldInfo = screens.Find("WorldInfo").GetComponent<PageWorldInfo>();
-                MenuController menuController = pageWorldInfo.field_Public_MenuController_0;
-                PageAvatar avatarPage = screens.Find("Avatar").GetComponent<PageAvatar>();
+            // whenever the usermanage face is avctive 
+            while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
+            Transform modinfoButton = GameObject.Find("UserInterface").transform.Find(Const.GUIAvatarButton);
 
-                string avatarID = menuController.activeAvatarId;
-                string avatarURL = menuController.activeAvatar.assetUrl;
-                string avatarName = menuController.activeAvatar.name;
-
-
-
-                if (menuController.activeAvatar.releaseStatus == "private")
-                {
-
-                    MelonLogger.Error("Avatar ID " + avatarID + " is private! ");
-                    avatarPage.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar { id = avatarID };
-
-                    MelonLogger.Msg("{" + "avatar_name:" + avatarName + "," + "avatar_id:" + avatarID + "," + "avatarurl:" + avatarURL + "}");
-                }
-                else
-                {
-                    MelonLogger.Error("Avatar ID " + avatarID + " is public!");
-
-                    avatarPage.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar { id = avatarID };
-                    MelonLogger.Msg("{" + "avatar_name:" + avatarName + "," + "avatar_id:" + avatarID + "," + "avatarurl:" + avatarURL + "}");
-                    avatarPage.ChangeToSelectedAvatar();
-                }
-
-            });
+            modinfoButton.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
+            modinfoButton.GetComponent<Button>().onClick.AddListener(GuiActions.DumpAvatarInfo());
         }
+
+
+
     }
 }
 
