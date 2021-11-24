@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 using VRC.Core;
 using VRC.UI;
 
@@ -32,7 +33,7 @@ namespace TestMod
             // whenever the usermanage face is avctive 
             while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
 
-            Transform saftey = GameObject.Find("UserInterface").transform.Find(Const.toggleSaftyPath);  
+            Transform saftey = GameObject.Find("UserInterface").transform.Find(Const.toggleSaftyPath);
             //saftey.GetComponent<TMPro.TextMeshProUGUI>().StartCoroutine();
 
         }
@@ -75,73 +76,61 @@ namespace TestMod
 
             Transform Main_Menu_title = GameObject.Find("UserInterface").transform.Find(Const.LeftwingThirdButton);
             Main_Menu_title.GetComponent<TMPro.TextMeshProUGUI>().text = Const.Graphing;
-           
+
         }
 
-        
+
         public IEnumerator OnModInfoButtonPress()
         {
-
             // whenever the usermanage face is avctive 
             while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
             Transform modinfoButton = GameObject.Find("UserInterface").transform.Find(Const.GUIModButton);
-           
-            // this should allow me to run when pressed
-            if (modinfoButton.GetComponent<UnityEngine.UI.Button>().IsPressed())
-            {
-                MelonLogger.Msg("Gameobj ->" + modinfoButton.name.ToString() + " " + " is pressed" + modinfoButton.GetComponent<UnityEngine.UI.Button>().IsPressed().ToString());
-                CloneAvatar(GameObject.Find("UserInterface").transform.Find("/Canvas_QuickMenu(Clone)"));
-            }
+
+            modinfoButton.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
+            modinfoButton.GetComponent<Button>().onClick.AddListener(DumpAvatarInfo());
         }
 
 
-        // Clones avatars 
-        private void CloneAvatar(Transform quickMenu)
+        public Action DumpAvatarInfo()
         {
-            Transform screens = GameObject.Find("UserInterface/MenuContent/Screens/").transform;
-            PageWorldInfo pageWorldInfo = screens.Find("WorldInfo").GetComponent<PageWorldInfo>();
+            return new Action(() =>
+            {
+                Transform screens = GameObject.Find("UserInterface").transform.Find("MenuContent/Screens/").transform;
+                PageWorldInfo pageWorldInfo = screens.Find("WorldInfo").GetComponent<PageWorldInfo>();
+                MenuController menuController = pageWorldInfo.field_Public_MenuController_0;
+                PageAvatar avatarPage = screens.Find("Avatar").GetComponent<PageAvatar>();
 
-            MenuController menuController = pageWorldInfo.field_Public_MenuController_0;
-            PageAvatar avatarPage = screens.Find("Avatar").GetComponent<PageAvatar>();
-
-            Transform buttonParent = quickMenu.transform.Find("Container/Window/QMParent/Menu_SelectedUser_Local/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_UserActions");
-            Utils.CreateDefaultButton("Force Clone Public Avatar", new Vector3(0, -25, 0), "Force the clone of this user's public avatar", Color.white, buttonParent,
-                new Action(() => {
-                    string avatarID = menuController.activeAvatarId;
-                    string avatarName = menuController.activeAvatar.name;
-                    string avatarURL = menuController.activeAvatar.assetUrl;
-
-                    // Be carefull this may get you banned i dont know and im affaid to try
-                    if (menuController.activeAvatar.releaseStatus == "private")
-                    {
-                        MelonLogger.Error("Avatar ID " + avatarID + " is private! BE CAREFULL");
-                        avatarPage.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar { id = avatarID };
-
-                        MelonLogger.Msg("Avi info name ->"+ " "+ avatarName);
-                        MelonLogger.Msg("Avi info Asset URL ->" + " " + avatarURL);
-                        MelonLogger.Msg("Avo info id ->" + " " + avatarID);
+                string avatarID = menuController.activeAvatarId;
+                string avatarURL = menuController.activeAvatar.assetUrl;
+                string avatarName = menuController.activeAvatar.name;
 
 
-                    }
-                    else
-                    {
-                        MelonLogger.Warning("Cloneing avatar....");
-                        avatarPage.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar { id = avatarID };
-                        avatarPage.ChangeToSelectedAvatar();
 
+                if (menuController.activeAvatar.releaseStatus == "private")
+                {
 
-                        MelonLogger.Msg("Avi info name ->" + " " + avatarName);
-                        MelonLogger.Msg("Avi info Asset URL ->" + " " + avatarURL);
-                        MelonLogger.Msg("Avo info id ->" + " " + avatarID);
-                    }
-                }));
+                    MelonLogger.Error("Avatar ID " + avatarID + " is private! ");
+                    avatarPage.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar { id = avatarID };
+
+                    MelonLogger.Msg("{" + "avatar_name:" + avatarName + "," + "avatar_id:" + avatarID + "," + "avatarurl:" + avatarURL + "}");
+                }
+                else
+                {
+                    MelonLogger.Error("Avatar ID " + avatarID + " is public!");
+
+                    avatarPage.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar { id = avatarID };
+                    MelonLogger.Msg("{" + "avatar_name:" + avatarName + "," + "avatar_id:" + avatarID + "," + "avatarurl:" + avatarURL + "}");
+                    avatarPage.ChangeToSelectedAvatar();
+                }
+
+            });
         }
-
-
     }
-
-
-
-
-
 }
+
+
+  
+
+
+
+

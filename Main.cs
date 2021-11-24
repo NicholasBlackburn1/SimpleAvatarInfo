@@ -33,7 +33,7 @@ namespace TestMod
 
         public const string dataHeader = "Captured Data ->";
         private AvatarStuff avatarstuff = new AvatarStuff();
-
+        private GuiStuff gui = new GuiStuff();
         public override void OnApplicationStart() // Runs after Game Initialization.
         {
 
@@ -66,7 +66,7 @@ namespace TestMod
         public override void OnUpdate() // Runs once per frame.
         {
 
-            
+            MelonCoroutines.Start(gui.OnModInfoButtonPress());
 
 
         }
@@ -145,7 +145,7 @@ namespace TestMod
             MelonCoroutines.Start(gui.OnFirstButtonTitle());
             MelonCoroutines.Start(gui.OnSecondButtonTitle());
             MelonCoroutines.Start(gui.OnThirdButtonTitle());
-            MelonCoroutines.Start(gui.OnModInfoButtonPress());
+        
 
 
 
