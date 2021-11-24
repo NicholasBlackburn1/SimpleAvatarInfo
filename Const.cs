@@ -11,6 +11,25 @@ namespace TestMod
 
         public const string ModTogglesTitle= "Enable Data Out";
 
+
+        //basic components
+        public const string GuiPanal = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/Profile";
+        public const string GuiPanalHeader = GuiPanal + "/WngHeader_H1";
+        public const string GuiPanalText = GuiPanalHeader + "/LeftItemContainer/Text_QM_H2 (1)";
+        public const string GUIInfoPanal = GuiPanal + "/ScrollRect/Viewport/VerticalLayoutGroup/InfoPanel";
+
+        // status pane
+        public const string GUIStatusPane = GUIInfoPanal + "/Status";
+        public const string GUIStatusTextHeader = GUIStatusPane + "/Text_Header";
+        public const string GUIStatusText = GUIStatusPane + "/Text_Status";
+
+        //Buttons
+        public const string GUIModButton = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Profile";
+
+
+
+
+
         // this is where all the Gui elements go for gui stuff
         public const string MainMenuTitlePath = "Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/Header_H1/LeftItemContainer/Text_Title";
         public const string VoiceMenuPath = "MenuContent/Screens/Settings/VoiceOptionsPanel";
@@ -29,5 +48,10 @@ namespace TestMod
         public const string LeftwingFirstButtonTitle = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Profile/Container/Text_QM_H3";
         public const string LeftwingSecondButtonTitle = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Friends/Container/Text_QM_H3";
         public const string LeftwingThirdButton = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Avatars/Container/Text_QM_H3";
-    }
+
+        // Wing Mod info Screen 
+
+        public const string LeftwingModMenuPage = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/Profile/ScrollRect";
+    }   
+        
 }

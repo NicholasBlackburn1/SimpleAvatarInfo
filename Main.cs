@@ -11,7 +11,7 @@ using UnityEngine;
 using VRC.Core;
 using VRC.UI;
 using VRC.UI.Core;
-
+using VRC.UI.Elements;
 
 namespace TestMod
 {
@@ -130,7 +130,7 @@ namespace TestMod
 
 
 
-
+            
         }
 
         // this holds the running stuff for my vrchat mod
@@ -142,10 +142,11 @@ namespace TestMod
             MelonCoroutines.Start(gui.OnLeftWingTitle("text In left wing~...."));
 
             // Gui Button's 
-            MelonCoroutines.Start(gui.OnFirstButton());
-            MelonCoroutines.Start(gui.OnSecondButton());
-            MelonCoroutines.Start(gui.OnThirdButton());
-            
+            MelonCoroutines.Start(gui.OnFirstButtonTitle());
+            MelonCoroutines.Start(gui.OnSecondButtonTitle());
+            MelonCoroutines.Start(gui.OnThirdButtonTitle());
+            MelonCoroutines.Start(gui.OnModInfoButtonPress());
+
 
 
         }
