@@ -141,18 +141,16 @@ namespace TestMod
         public void RegisterGuiLayout()
         {
             LeftWingMenu gui = new LeftWingMenu();
+            ModGuiWindow window = new ModGuiWindow();
 
             MelonCoroutines.Start(gui.OnMainTitleRun("text UwU~...."));
             MelonCoroutines.Start(gui.OnLeftWingTitle("text In left wing~...."));
 
-            // Gui Button's 
+            // Wing Gui Button's 
             MelonCoroutines.Start(gui.OnFirstButtonTitle());
             MelonCoroutines.Start(gui.OnSecondButtonTitle());
             MelonCoroutines.Start(gui.OnThirdButtonTitle());
 
-
-
-       
         }
 
         // this allows me to register button pressess and stuff
@@ -162,6 +160,7 @@ namespace TestMod
 
             MelonCoroutines.Start(gui.OnModInfoButtonPress());
             MelonCoroutines.Start(gui.OnAvatarInfoButtonPress());
+
         }
 
     }

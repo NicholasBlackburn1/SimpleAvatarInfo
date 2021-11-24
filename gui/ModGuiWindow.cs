@@ -24,20 +24,14 @@ namespace TestMod.gui
                 // sets up base gui for allowing me to add data to it 
                 Transform quickMenu = GameObject.Find("UserInterface").transform.Find(Const.QuickMenuParent);
                 Transform quickTitle = GameObject.Find("UserInterface").transform.Find(Const.QuickMenuTitle);
-                Transform baseMenu = quickMenu.transform.Find(Const.QuickMenuDashBoad);
+                Transform quickSection= quickMenu.transform.Find(Const.QuickMenuSectionTitle);
 
-                // Inits menu stufff
-                Transform MenuTransform = UnityEngine.Object.Instantiate(baseMenu, quickMenu).transform;
-                Transform MenuTitleTransform = UnityEngine.Object.Instantiate(quickTitle, quickMenu).transform;
 
-                    
                 // sets title text up
-                var menuTitle = MenuTitleTransform.gameObject.AddComponent<TextMeshProUGUI>();
-                menuTitle.text = MenuTitleText;
-                menuTitle.rectTransform.localPosition.Set(0, 0, 0);
-
-                menuTitle.gameObject.SetActive(true);
-
+                var menuTitle = quickTitle.GetComponent<TextMeshProUGUI>();
+                    menuTitle.text = MenuTitleText;
+                    menuTitle.rectTransform.localPosition.Set(0, 0, 0);
+                   
         }
     }
 }

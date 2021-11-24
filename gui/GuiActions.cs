@@ -19,6 +19,22 @@ namespace TestMod.gui
     class GuiActions
     {
 
+        // Displays info in a nice way for avatars
+        private static void DisplayAvatarInfoInConsole(string avatarID, string avatarName, string avatarURL, string avatarVersion, string avatarStatus)
+        {
+
+            MelonLogger.Warning("------------GRABBED AVATAR DATA-----------");
+            MelonLogger.Error("AVATAR STATUS:" + " " + avatarStatus);
+            MelonLogger.Msg("AVATAR ID:" + " " + avatarID);
+            MelonLogger.Msg("AVATAR NAME:" + " " + avatarName);
+            MelonLogger.Msg("AVATAR ASSET URL:" + " " + avatarURL);
+            MelonLogger.Msg("AVATAR Asset Version:" + " " + avatarVersion);
+            MelonLogger.Msg("{" + "avatar_name:" + " " + " ' " + avatarName + " ' " + "," + "avatar_id:" + " " + " ' " + avatarID + " ' " + "," + "avatarurl:" + " " + " ' " + avatarURL + " ' " + "}");
+            MelonLogger.Warning("------------Done GRABBING AVATAR DATA-----------");
+
+
+        }
+
         // This allows me to dump public and private avi's to the console
         public static Action DumpAvatarInfo()
         {
@@ -32,27 +48,42 @@ namespace TestMod.gui
                 string avatarID = menuController.activeAvatarId;
                 string avatarURL = menuController.activeAvatar.assetUrl;
                 string avatarName = menuController.activeAvatar.name;
+                string avatarVersion= menuController.activeAvatar.assetVersion.ToString();
 
 
 
                 if (menuController.activeAvatar.releaseStatus == "private")
                 {
-
-                    MelonLogger.Error("Avatar ID " + avatarID + " is private! ");
                     avatarPage.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar { id = avatarID };
-
-                    MelonLogger.Msg("{" + "avatar_name:" + avatarName + "," + "avatar_id:" + avatarID + "," + "avatarurl:" + avatarURL + "}");
-                    
+                    DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Private");
+                 
                 }
                 else
                 {
-                    MelonLogger.Error("Avatar ID " + avatarID + " is public!");
 
                     avatarPage.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar { id = avatarID };
-                    MelonLogger.Msg("{" + "avatar_name:" + avatarName + "," + "avatar_id:" + avatarID + "," + "avatarurl:" + avatarURL + "}");
+
+                    DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Public");
                     avatarPage.ChangeToSelectedAvatar();
                 }
 
+            });
+
+
+         
+        }
+
+        // this should launch my new menu 
+        public static Action openModInfoMenu()
+        {
+            return new Action(() =>
+            {
+               ModGuiWindow gui = new ModGuiWindow();
+                // Mod menu Register
+                gui.createNewMenu("OwO");
+
+                MelonLogger.Msg("-------MOD INFORMATION---------");
+                MelonLogger.Msg(" Version" + " " + "1.0.0");
             });
         }
     }

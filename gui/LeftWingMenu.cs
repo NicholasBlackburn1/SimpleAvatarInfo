@@ -93,7 +93,7 @@ namespace TestMod.gui
             Transform modinfoButton = GameObject.Find("UserInterface").transform.Find(Const.GUIModButton);
 
             modinfoButton.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
-            //modinfoButton.GetComponent<Button>().onClick.AddListener();
+            modinfoButton.GetComponent<Button>().onClick.AddListener(GuiActions.openModInfoMenu());
         }
 
 
