@@ -28,6 +28,12 @@ namespace TestMod
         public const string GUIAvatarButton = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Friends";
 
 
+        // Main Quick Menu Object Locations 
+        public const string QuickMenuParent = "Canvas_QuickMenu(Clone)";
+        public const string QuickMenuDashBoad = "Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard";
+        public const string QuickMenuTitle = "Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/Header_H1";
+        public const string QuickMenuSectionTitle = "Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Header_QuickLinks/LeftItemContainer/Text_Title";
+        public const string QuickMenuSectionBody = "Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickLinks";
 
 
 
@@ -50,9 +56,7 @@ namespace TestMod
         public const string LeftwingSecondButtonTitle = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Friends/Container/Text_QM_H3";
         public const string LeftwingThirdButton = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Avatars/Container/Text_QM_H3";
 
-        // Wing Mod info Screen 
-
-        public const string LeftwingModMenuPage = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/Profile/ScrollRect";
+      
     }   
         
 }

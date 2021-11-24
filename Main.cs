@@ -3,10 +3,15 @@
  * This is the main mod class for my amazing moddy 
  * TODO:  change text on the main menu based on waht shit is going to happen
  * UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/Header_H1/LeftItemContainer/
+ * 
+ * 
+ * 
+ * TODO: got force cloner working but now need to get a acutally a button to force clone not just one button auto clone 
  */
 using MelonLoader;
 using Mono.CSharp;
 using System.Collections;
+using TestMod.gui;
 using UnityEngine;
 using VRC.Core;
 using VRC.UI;
@@ -33,7 +38,7 @@ namespace TestMod
 
         public const string dataHeader = "Captured Data ->";
         private AvatarStuff avatarstuff = new AvatarStuff();
-        private GuiStuff gui = new GuiStuff();
+        private LeftWingMenu gui = new LeftWingMenu();
         public override void OnApplicationStart() // Runs after Game Initialization.
         {
 
@@ -135,7 +140,7 @@ namespace TestMod
         // this holds the running stuff for my vrchat mod
         public void RegisterGuiLayout()
         {
-            GuiStuff gui = new GuiStuff();
+            LeftWingMenu gui = new LeftWingMenu();
 
             MelonCoroutines.Start(gui.OnMainTitleRun("text UwU~...."));
             MelonCoroutines.Start(gui.OnLeftWingTitle("text In left wing~...."));
@@ -144,13 +149,16 @@ namespace TestMod
             MelonCoroutines.Start(gui.OnFirstButtonTitle());
             MelonCoroutines.Start(gui.OnSecondButtonTitle());
             MelonCoroutines.Start(gui.OnThirdButtonTitle());
+
+
+
        
         }
 
         // this allows me to register button pressess and stuff
         public void RegisterGuiActions()
         {
-            GuiStuff gui = new GuiStuff();
+            LeftWingMenu gui = new LeftWingMenu();
 
             MelonCoroutines.Start(gui.OnModInfoButtonPress());
             MelonCoroutines.Start(gui.OnAvatarInfoButtonPress());

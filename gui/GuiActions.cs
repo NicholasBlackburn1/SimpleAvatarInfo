@@ -14,7 +14,7 @@ using VRC.UI;
 /*
  * this is the actions class for my gui UwU this will allow me to link certin stuff to my vrchat buttons 
  * **/
-namespace TestMod
+namespace TestMod.gui
 {
     class GuiActions
     {

@@ -13,7 +13,7 @@ using VRC.Core;
 using VRC.SDK3;
 using VRC.UI;
 
-namespace TestMod
+namespace TestMod.utils
 {
     class PlayerStuff
     {

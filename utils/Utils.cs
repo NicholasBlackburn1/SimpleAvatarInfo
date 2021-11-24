@@ -18,7 +18,8 @@ using MelonLoader;
 using TMPro;
 using UnityEngine.UI;
 
-namespace TestMod {
+namespace TestMod.utils
+{
 
 
     public static class Utils

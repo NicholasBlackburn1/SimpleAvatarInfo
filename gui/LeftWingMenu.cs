@@ -9,13 +9,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using VRC.Core;
 using VRC.UI;
+using TestMod.utils;
 
 /*
  This class is for handling all my gui goodies Uwu
  */
-namespace TestMod
+namespace TestMod.gui
+
 {
-    class GuiStuff
+    class LeftWingMenu
     {
 
 
