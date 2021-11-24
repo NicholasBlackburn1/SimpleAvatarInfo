@@ -80,6 +80,7 @@ namespace TestMod
         }
 
 
+        //TODO: get a window to dislay mod info
         public IEnumerator OnModInfoButtonPress()
         {
             // whenever the usermanage face is avctive 
@@ -91,6 +92,8 @@ namespace TestMod
         }
 
 
+        // this will dump avatar info and should display it 
+        // TODO: get data to be displayed from avatar
         public IEnumerator OnAvatarInfoButtonPress()
         {
             // whenever the usermanage face is avctive 

@@ -66,7 +66,7 @@ namespace TestMod
         public override void OnUpdate() // Runs once per frame.
         {
 
-            MelonCoroutines.Start(gui.OnModInfoButtonPress());
+            MelonCoroutines.Start(gui.OnAvatarInfoButtonPress());
 
 
         }
