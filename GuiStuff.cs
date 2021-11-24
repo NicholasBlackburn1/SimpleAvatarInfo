@@ -28,15 +28,18 @@ namespace TestMod
             Main_Menu_title.GetComponent<TMPro.TextMeshProUGUI>().text = message;
         }
 
-        public IEnumerator onSafty(MelonCoroutines routines)
+        public IEnumerator onSafty()
         {
             // whenever the usermanage face is avctive 
             while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
 
             Transform saftey = GameObject.Find("UserInterface").transform.Find(Const.toggleSaftyPath);
-            //saftey.GetComponent<TMPro.TextMeshProUGUI>().StartCoroutine();
 
+            saftey.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
+            //saftey.GetComponent<Button>().onClick.AddListener(GuiActions.DumpAvatarInfo());
         }
+
+    
 
 
         public IEnumerator OnLeftWingTitle(string message)
@@ -80,7 +83,7 @@ namespace TestMod
         }
 
 
-        //TODO: get a window to dislay mod info
+        //TODO: get a window to dislay mod infox
         public IEnumerator OnModInfoButtonPress()
         {
             // whenever the usermanage face is avctive 

@@ -58,7 +58,7 @@ namespace TestMod
         public override void OnSceneWasInitialized(int buildindex, string sceneName) // Runs when a Scene has Initialized and is passed the Scene's Build Index and Name.
         {
             OnLoadGui();
-            RegisterGuiRuns();
+            RegisterGuiLayout();
 
 
         }
@@ -66,8 +66,7 @@ namespace TestMod
         public override void OnUpdate() // Runs once per frame.
         {
 
-            MelonCoroutines.Start(gui.OnAvatarInfoButtonPress());
-
+            RegisterGuiActions();
 
         }
 
@@ -134,7 +133,7 @@ namespace TestMod
         }
 
         // this holds the running stuff for my vrchat mod
-        public void RegisterGuiRuns()
+        public void RegisterGuiLayout()
         {
             GuiStuff gui = new GuiStuff();
 
@@ -145,12 +144,17 @@ namespace TestMod
             MelonCoroutines.Start(gui.OnFirstButtonTitle());
             MelonCoroutines.Start(gui.OnSecondButtonTitle());
             MelonCoroutines.Start(gui.OnThirdButtonTitle());
-        
-
-
-
+       
         }
 
+        // this allows me to register button pressess and stuff
+        public void RegisterGuiActions()
+        {
+            GuiStuff gui = new GuiStuff();
+
+            MelonCoroutines.Start(gui.OnModInfoButtonPress());
+            MelonCoroutines.Start(gui.OnAvatarInfoButtonPress());
+        }
 
     }
 }
