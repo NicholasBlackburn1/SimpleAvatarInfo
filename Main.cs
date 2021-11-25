@@ -10,9 +10,12 @@
  */
 using MelonLoader;
 using Mono.CSharp;
+using System;
 using System.Collections;
 using TestMod.gui;
+using TestMod.utils;
 using UnityEngine;
+using VRC;
 using VRC.Core;
 using VRC.UI;
 using VRC.UI.Core;
@@ -122,18 +125,7 @@ namespace TestMod
         // loading for mod 
         public void OnLoadGui()
         {
-            // creates and finds the text title object
-            Transform text = GameObject.Find("UserInterface").transform.Find(Const.MainMenuTitlePath);
-            getGameObjInfo(text);
-
-            Transform safty = GameObject.Find("UserInterface").transform.Find(Const.toggleSaftyPath);
-            getGameObjInfo(safty);
-
-            Transform wing_left_title = GameObject.Find("UserInterface").transform.Find(Const.Leftwingtitlepath);
-            getGameObjInfo(wing_left_title);
-
-
-
+          
             
         }
 
@@ -142,6 +134,7 @@ namespace TestMod
         {
             LeftWingMenu gui = new LeftWingMenu();
             ModGuiWindow window = new ModGuiWindow();
+            PlayerStuff stuff = new PlayerStuff();
 
             MelonCoroutines.Start(gui.OnMainTitleRun("text UwU~...."));
             MelonCoroutines.Start(gui.OnLeftWingTitle("text In left wing~...."));
@@ -151,17 +144,23 @@ namespace TestMod
             MelonCoroutines.Start(gui.OnSecondButtonTitle());
             MelonCoroutines.Start(gui.OnThirdButtonTitle());
 
+            // Network regiserting 
+            NetworkManagerHooks.OnJoin += stuff.OnPlayerJoined;
+
         }
 
         // this allows me to register button pressess and stuff
         public void RegisterGuiActions()
         {
             LeftWingMenu gui = new LeftWingMenu();
+            
 
             MelonCoroutines.Start(gui.OnModInfoButtonPress());
             MelonCoroutines.Start(gui.OnAvatarInfoButtonPress());
+           
 
         }
+
 
     }
 }
