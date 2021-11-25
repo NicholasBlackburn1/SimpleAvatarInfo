@@ -25,11 +25,9 @@ namespace TestMod.gui
             while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
                 
                 // sets up base gui for allowing me to add data to it 
-                Transform quickMenu = GameObject.Find("UserInterface").transform.Find(Const.QuickMenuParent);
-                
-                SubMenu menu = new SubMenu(quickMenu, "OwO", Const.QuickMenuParent,"owo",null);
-            menu.gameObject.SetActive(true);
+                Transform quickMenu = GameObject.Find("UserInterface").transform.Find(Const.QuickMenuSectionBody);
 
+               
         }
     }
 }

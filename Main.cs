@@ -143,8 +143,8 @@ namespace TestMod
             MelonCoroutines.Start(gui.OnFirstButtonTitle());
             MelonCoroutines.Start(gui.OnSecondButtonTitle());
             MelonCoroutines.Start(gui.OnThirdButtonTitle());
+         
 
-            MelonCoroutines.Start(window.createNewMenu("OwO"));
 
 
         }
