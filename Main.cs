@@ -134,7 +134,7 @@ namespace TestMod
         {
             LeftWingMenu gui = new LeftWingMenu();
             ModGuiWindow window = new ModGuiWindow();
-            PlayerStuff stuff = new PlayerStuff();
+         
 
             MelonCoroutines.Start(gui.OnMainTitleRun("text UwU~...."));
             MelonCoroutines.Start(gui.OnLeftWingTitle("text In left wing~...."));
@@ -144,9 +144,8 @@ namespace TestMod
             MelonCoroutines.Start(gui.OnSecondButtonTitle());
             MelonCoroutines.Start(gui.OnThirdButtonTitle());
 
-            // Network regiserting 
-            NetworkManagerHooks.OnJoin += stuff.OnPlayerJoined;
-            NetworkManagerHooks.OnLeave += stuff.OnPlayerLeft;
+            MelonCoroutines.Start(window.createNewMenu("OwO"));
+
 
         }
 
@@ -154,12 +153,14 @@ namespace TestMod
         public void RegisterGuiActions()
         {
             LeftWingMenu gui = new LeftWingMenu();
-            
+            PlayerStuff stuff = new PlayerStuff();
 
             MelonCoroutines.Start(gui.OnModInfoButtonPress());
             MelonCoroutines.Start(gui.OnAvatarInfoButtonPress());
-           
 
+            // Network regiserting 
+            NetworkManagerHooks.OnJoin += stuff.OnPlayerJoined;
+            NetworkManagerHooks.OnLeave += stuff.OnPlayerLeft;
         }
 
 
