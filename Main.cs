@@ -146,6 +146,7 @@ namespace TestMod
 
             // Network regiserting 
             NetworkManagerHooks.OnJoin += stuff.OnPlayerJoined;
+            NetworkManagerHooks.OnLeave += stuff.OnPlayerLeft;
 
         }
 
