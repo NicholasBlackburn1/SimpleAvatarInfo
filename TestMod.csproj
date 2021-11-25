@@ -137,6 +137,9 @@
     <Reference Include="VRCCore-Standalone">
       <HintPath>..\VRChat\MelonLoader\Managed\VRCCore-Standalone.dll</HintPath>
     </Reference>
+    <Reference Include="VRChatUtilityKit">
+      <HintPath>..\VRChat\MelonLoader\Managed\VRChatUtilityKit.dll</HintPath>
+    </Reference>
     <Reference Include="VRCLog">
       <HintPath>..\VRChat\MelonLoader\Managed\VRCLog.dll</HintPath>
     </Reference>

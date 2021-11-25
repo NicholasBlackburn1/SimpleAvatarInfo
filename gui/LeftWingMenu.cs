@@ -10,6 +10,7 @@ using UnityEngine.UI;
 using VRC.Core;
 using VRC.UI;
 using TestMod.utils;
+using VRChatUtilityKit.Ui;
 
 /*
  This class is for handling all my gui goodies Uwu
@@ -84,6 +85,19 @@ namespace TestMod.gui
 
         }
 
+        public IEnumerator stuff()
+        {
+            // whenever the usermanage face is avctive 
+            while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
+            Transform pub = GameObject.Find("UserInterface").transform.Find(Const.QuickMenuParent);
+
+            SubMenu sub = new SubMenu(pub,"name",pub.gameObject.name.ToString(),"header",null);
+            sub.Text = "this is a dev screen ";
+            sub.gameObject.SetActive(true);
+
+        }
+
+
 
         //TODO: get a window to dislay mod infox
         public IEnumerator OnModInfoButtonPress()
@@ -99,6 +113,20 @@ namespace TestMod.gui
 
         // this will dump avatar info and should display it 
         // TODO: get data to be displayed from avatar
+        public IEnumerator OnAvatarCloneButtonPress()
+        {
+            // whenever the usermanage face is avctive 
+            while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
+            Transform modinfoButton = GameObject.Find("UserInterface").transform.Find(Const.GUIClone);
+
+            modinfoButton.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
+            modinfoButton.GetComponent<Button>().onClick.AddListener(GuiActions.CloneAvatar());
+
+          
+            
+        }
+
+
         public IEnumerator OnAvatarInfoButtonPress()
         {
             // whenever the usermanage face is avctive 
@@ -106,9 +134,11 @@ namespace TestMod.gui
             Transform modinfoButton = GameObject.Find("UserInterface").transform.Find(Const.GUIAvatarButton);
 
             modinfoButton.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
-            modinfoButton.GetComponent<Button>().onClick.AddListener(GuiActions.DumpAvatarInfo());
-        }
+            modinfoButton.GetComponent<Button>().onClick.AddListener(GuiActions.AvatarInfo());
 
+
+
+        }
 
 
     }

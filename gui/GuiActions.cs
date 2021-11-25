@@ -4,12 +4,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC.Core;
 using VRC.UI;
+using VRChatUtilityKit.Ui;
+using AvatarList = Il2CppSystem.Collections.Generic.List<VRC.Core.ApiAvatar>;
 
 /*
  * this is the actions class for my gui UwU this will allow me to link certin stuff to my vrchat buttons 
@@ -18,6 +21,130 @@ namespace TestMod.gui
 {
     class GuiActions
     {
+
+        // This allows me to dump public and private avi's to the console
+        public static Action CloneAvatar()
+        {
+            return new Action(() =>
+            {
+                Transform screens = GameObject.Find("UserInterface").transform.Find("MenuContent/Screens/").transform;
+                PageWorldInfo pageWorldInfo = screens.Find("WorldInfo").GetComponent<PageWorldInfo>();
+                MenuController menuController = pageWorldInfo.field_Public_MenuController_0;
+                PageAvatar avatarPage = screens.Find("Avatar").GetComponent<PageAvatar>();
+
+                // avatar info
+
+                string avatarID = menuController.activeAvatarId;
+                string avatarURL = menuController.activeAvatar.assetUrl;
+                string avatarName = menuController.activeAvatar.name;
+                string avatarVersion= menuController.activeAvatar.assetVersion.ToString();
+
+
+
+                if (menuController.activeAvatar.releaseStatus == "private")
+                {
+                    avatarPage.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar { id = avatarID };
+                    DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Private");
+
+                    // Warning message for cloning a private avatar
+                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Private Avatar!", "Cloning a Privte avatar is amazing, but be carefull you could get fucked by vrc admins!", "OwO Do it ", new Action(() =>
+                    {
+                        MelonLogger.Msg("Cloneing Avi...");
+                        avatarPage.ChangeToSelectedAvatar();
+                    }),null);
+
+                } 
+                else
+                {
+
+                    avatarPage.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar { id = avatarID };
+                    
+                    DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Public");
+
+                    // Warning message for cloning a private avatar
+                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Public Avatar!", "Cloning a Public avatar is amazing, but be carefull you could get fucked by vrc admins!", "OwO Do it ", new Action(() =>
+                    {
+                        MelonLogger.Msg("Cloneing Avi...");
+                        avatarPage.ChangeToSelectedAvatar();
+                    }), null);
+
+                }
+
+            });
+
+
+         
+        }
+
+        public static Action AvatarInfo()
+        {
+            return new Action(() =>
+            {
+                Transform screens = GameObject.Find("UserInterface").transform.Find("MenuContent/Screens/").transform;
+                PageWorldInfo pageWorldInfo = screens.Find("WorldInfo").GetComponent<PageWorldInfo>();
+                MenuController menuController = pageWorldInfo.field_Public_MenuController_0;
+                PageAvatar avatarPage = screens.Find("Avatar").GetComponent<PageAvatar>();
+
+                // avatar info
+
+                string avatarID = menuController.activeAvatarId;
+                string avatarURL = menuController.activeAvatar.assetUrl;
+                string avatarName = menuController.activeAvatar.name;
+                string avatarVersion = menuController.activeAvatar.assetVersion.ToString();
+
+
+
+                if (menuController.activeAvatar.releaseStatus == "private")
+                {
+                    avatarPage.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar { id = avatarID };
+                    DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Private");
+
+                    // Warning message for cloning a private avatar
+                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Avatar Info!", avatarInfoString(avatarID, avatarName, avatarURL), "Download Avatar ", new Action(() =>
+                    {
+                        MelonLogger.Msg("Downloading avatar..");
+                        Downloader(avatarURL, avatarName, @"D:\ripped vrc avatars\Unextracted avatars");
+                       
+                    }), null);
+
+                }
+                else
+                {
+
+                    avatarPage.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar { id = avatarID };
+
+                    DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Public");
+
+                    // Warning message for cloning a private avatar
+                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Avatar Info!", avatarInfoString(avatarID,avatarName,avatarURL), "Download Avatar", new Action(() =>
+                    {
+                        MelonLogger.Msg("Downloading avatar...");
+                        Downloader(avatarURL, avatarName, @"D:\ripped vrc avatars\Unextracted avatars");
+                    }), null);
+
+                }
+
+            });
+
+
+
+        }
+
+
+        // this should launch my new menu 
+        public static Action openModInfoMenu()
+        {
+            return new Action(() =>
+            {
+                ModGuiWindow mod = new ModGuiWindow();
+
+                MelonLogger.Msg("-------MOD INFORMATION---------");
+                MelonLogger.Msg(" Version" + " " + "1.0.0");
+                MelonCoroutines.Start(mod.createNewMenu("OwO"));
+               
+            });
+        }
+
 
         // Displays info in a nice way for avatars
         private static void DisplayAvatarInfoInConsole(string avatarID, string avatarName, string avatarURL, string avatarVersion, string avatarStatus)
@@ -34,57 +161,24 @@ namespace TestMod.gui
 
 
         }
-
-        // This allows me to dump public and private avi's to the console
-        public static Action DumpAvatarInfo()
+        // Downloads vrc avatars 
+        public static void Downloader(string avatarurl, string avatarname, string path)
         {
-            return new Action(() =>
+            using (var client = new WebClient())
             {
-                Transform screens = GameObject.Find("UserInterface").transform.Find("MenuContent/Screens/").transform;
-                PageWorldInfo pageWorldInfo = screens.Find("WorldInfo").GetComponent<PageWorldInfo>();
-                MenuController menuController = pageWorldInfo.field_Public_MenuController_0;
-                PageAvatar avatarPage = screens.Find("Avatar").GetComponent<PageAvatar>();
+                MelonLogger.Warning("Starting Downloading File named" + " " + path + @"\" + avatarname + ".vrca");
 
-                string avatarID = menuController.activeAvatarId;
-                string avatarURL = menuController.activeAvatar.assetUrl;
-                string avatarName = menuController.activeAvatar.name;
-                string avatarVersion= menuController.activeAvatar.assetVersion.ToString();
-
-
-
-                if (menuController.activeAvatar.releaseStatus == "private")
-                {
-                    avatarPage.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar { id = avatarID };
-                    DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Private");
-                 
-                }
-                else
-                {
-
-                    avatarPage.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar { id = avatarID };
-
-                    DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Public");
-                    avatarPage.ChangeToSelectedAvatar();
-                }
-
-            });
-
-
-         
+                System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls | System.Net.SecurityProtocolType.Tls11 | System.Net.SecurityProtocolType.Tls12;
+                client.Headers.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0)");
+                client.DownloadFileAsync(new Uri(avatarurl), path + @"\" + avatarname + ".vrca");
+                MelonLogger.Msg("Done Downloading File named" + " " + path + @"\" + avatarname + ".vrca");
+            }
         }
 
-        // this should launch my new menu 
-        public static Action openModInfoMenu()
+        private static string avatarInfoString(string avatarID, string avatarName, string avatarURL)
         {
-            return new Action(() =>
-            {
-               ModGuiWindow gui = new ModGuiWindow();
-                // Mod menu Register
-                gui.createNewMenu("OwO");
-
-                MelonLogger.Msg("-------MOD INFORMATION---------");
-                MelonLogger.Msg(" Version" + " " + "1.0.0");
-            });
+            return "Avatar ID :" + " " + avatarID + ",\n" + "Avtar Name: " + avatarName + ",\n" + "Avatar URL:" + " " + avatarURL;
         }
     }
+ 
 }

@@ -26,7 +26,7 @@ namespace TestMod
         //Buttons
         public const string GUIModButton = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Profile";
         public const string GUIAvatarButton = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Friends";
-
+        public const string GUIClone="Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Avatars";
 
         // Main Quick Menu Object Locations 
         public const string QuickMenuParent = "Canvas_QuickMenu(Clone)";
@@ -35,6 +35,10 @@ namespace TestMod
         public const string QuickMenuSectionTitle = "Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Header_QuickLinks/LeftItemContainer/Text_Title";
         public const string QuickMenuSectionBody = "Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickLinks";
 
+        // Avatar Preview locals
+        public const string AvatarPreviewRoot = "MenuContent/Screens/Avatar/AvatarPreviewBase/MainRoot";
+        public const string AvatarPreviewModel = "MenuContent/Screens/Avatar/AvatarPreviewBase/MainModel";
+        public const string AvatarPreviewAvatarPrefab = "MenuContent/Screens/Avatar/AvatarPreviewBase/MainRoot/MainModel/AvatarPrefab(Clone)";
 
 
         // this is where all the Gui elements go for gui stuff
@@ -47,7 +51,7 @@ namespace TestMod
         public const string ModFirstButton = "Mod Info";
         public const string ModTitle = "Nickys Mod Owo~";
         public const string AviInfo = "Avatar Info";
-        public const string Graphing = "Data Display";
+        public const string Graphing = "Avatar Cloneing";
 
         // Wing menu ele,ents
         public const string Leftwingtitlepath = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/WngHeader_H1/LeftItemContainer/Text_Title";
