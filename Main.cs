@@ -157,6 +157,7 @@ namespace TestMod
 
             MelonCoroutines.Start(gui.OnModInfoButtonPress());
             MelonCoroutines.Start(gui.OnAvatarInfoButtonPress());
+            MelonCoroutines.Start(gui.OnAvatarCloneButtonPress());
 
             // Network regiserting 
             NetworkManagerHooks.OnJoin += stuff.OnPlayerJoined;
