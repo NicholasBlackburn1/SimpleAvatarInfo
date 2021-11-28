@@ -1,5 +1,6 @@
 ﻿
 using MelonLoader;
+using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,6 +22,8 @@ namespace TestMod.gui
 {
     class GuiActions
     {
+      
+
 
         // This allows me to dump public and private avi's to the console
         public static Action CloneAvatar()
@@ -66,6 +69,7 @@ namespace TestMod.gui
                     {
                         MelonLogger.Msg("Cloneing Avi...");
                         avatarPage.ChangeToSelectedAvatar();
+                       
                     }), null);
 
                 }
@@ -76,7 +80,7 @@ namespace TestMod.gui
          
         }
 
-        public static Action AvatarInfo()
+        public static Action AvatarInfo(string downloadlocal)
         {
             return new Action(() =>
             {
@@ -84,6 +88,7 @@ namespace TestMod.gui
                 PageWorldInfo pageWorldInfo = screens.Find("WorldInfo").GetComponent<PageWorldInfo>();
                 MenuController menuController = pageWorldInfo.field_Public_MenuController_0;
                 PageAvatar avatarPage = screens.Find("Avatar").GetComponent<PageAvatar>();
+        
 
                 // avatar info
 
@@ -103,7 +108,7 @@ namespace TestMod.gui
                     VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Avatar Info!", avatarInfoString(avatarID, avatarName, avatarURL), "Download Avatar ", new Action(() =>
                     {
                         MelonLogger.Msg("Downloading avatar..");
-                        Downloader(avatarURL, avatarName, @"D:\ripped vrc avatars\Unextracted avatars");
+                        Downloader(avatarURL, avatarName, downloadlocal);
                        
                     }), null);
 
@@ -119,7 +124,9 @@ namespace TestMod.gui
                     VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Avatar Info!", avatarInfoString(avatarID,avatarName,avatarURL), "Download Avatar", new Action(() =>
                     {
                         MelonLogger.Msg("Downloading avatar...");
-                        Downloader(avatarURL, avatarName, @"D:\ripped vrc avatars\Unextracted avatars");
+                        Downloader(avatarURL, avatarName, downloadlocal);
+                      
+
                     }), null);
 
                 }
@@ -136,12 +143,16 @@ namespace TestMod.gui
         {
             return new Action(() =>
             {
-                ModGuiWindow mod = new ModGuiWindow();
-
+                
                 MelonLogger.Msg("-------MOD INFORMATION---------");
                 MelonLogger.Msg(" Version" + " " + "1.0.0");
-                MelonCoroutines.Start(mod.createNewMenu("OwO"));
-               
+
+                VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Mod Info", modInfo(), "Thankies for downloading", new Action(() =>
+                {
+                    MelonLogger.Msg("Opened mod menu");
+                    
+                }));
+
             });
         }
 
@@ -175,10 +186,19 @@ namespace TestMod.gui
             }
         }
 
+        // Avatar uwu
         private static string avatarInfoString(string avatarID, string avatarName, string avatarURL)
         {
             return "Avatar ID :" + " " + avatarID + ",\n" + "Avtar Name: " + avatarName + ",\n" + "Avatar URL:" + " " + avatarURL;
         }
+
+        // mod info
+        private static string modInfo()
+        {
+            return "ModName: " + BuildInfo.Name + "\n" + " Author: " + BuildInfo.Author + "\n" + "Version: " + BuildInfo.Version + "\n" + "Mod Url: "+ BuildInfo.DownloadLink +  " \n";
+        }
+
+    
     }
  
 }

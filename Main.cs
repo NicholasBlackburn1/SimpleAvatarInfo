@@ -21,6 +21,7 @@ using VRC.UI;
 using VRC.UI.Core;
 using VRC.UI.Elements;
 
+
 namespace TestMod
 {
     public static class BuildInfo
@@ -42,6 +43,9 @@ namespace TestMod
         public const string dataHeader = "Captured Data ->";
         private AvatarStuff avatarstuff = new AvatarStuff();
         private LeftWingMenu gui = new LeftWingMenu();
+        public static MelonPreferences_Category settingsCategory;
+        public static MelonPreferences_Entry<string> downloadpath;
+
         public override void OnApplicationStart() // Runs after Game Initialization.
         {
 
@@ -53,9 +57,15 @@ namespace TestMod
             MelonLogger.Msg("VRC ACCOUNT VERIFIED" + "=> " + VRC.Core.APIUser.IsAccountVerified);
             MelonLogger.Msg("VRC AVATAR Version" + "=> " + VRC.Core.ApiAvatar.VERSION.ToString());
             MelonLogger.Msg("VRC Avatar unity version" + "=> " + avt.unityVersion);
+            settingsCategory = MelonPreferences.CreateCategory("settings");
+            downloadpath = (MelonPreferences_Entry<string>)settingsCategory.CreateEntry("downloadpath", "C:examplepath");
 
+            // simople 
+            if (downloadpath != null)
+            {
+                MelonPreferences.Save();
 
-
+            }
         }
 
         public override void OnSceneWasLoaded(int buildindex, string sceneName) // Runs when a Scene has Loaded and is passed the Scene's Build Index and Name.
@@ -156,12 +166,10 @@ namespace TestMod
             PlayerStuff stuff = new PlayerStuff();
 
             MelonCoroutines.Start(gui.OnModInfoButtonPress());
-            MelonCoroutines.Start(gui.OnAvatarInfoButtonPress());
+            MelonCoroutines.Start(gui.OnAvatarInfoButtonPress(TestMod.downloadpath.Value));
             MelonCoroutines.Start(gui.OnAvatarCloneButtonPress());
 
-            // Network regiserting 
-            NetworkManagerHooks.OnJoin += stuff.OnPlayerJoined;
-            NetworkManagerHooks.OnLeave += stuff.OnPlayerLeft;
+            
         }
 
 

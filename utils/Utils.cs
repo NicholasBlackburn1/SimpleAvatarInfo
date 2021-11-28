@@ -107,6 +107,22 @@ namespace TestMod.utils
 
             return buttonTransform;
         }
+
+
+
+        // addloed 
+        public class AvatarjsonFile
+        {
+            public string id { set; get; }
+            public string name { set; get; }
+
+            public string avatarUrl { set; get; }
+        }
+
+
     }
+
+
+
 }
 

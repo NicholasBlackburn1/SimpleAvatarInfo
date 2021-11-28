@@ -127,14 +127,14 @@ namespace TestMod.gui
         }
 
 
-        public IEnumerator OnAvatarInfoButtonPress()
+        public IEnumerator OnAvatarInfoButtonPress(string download)
         {
             // whenever the usermanage face is avctive 
             while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
             Transform modinfoButton = GameObject.Find("UserInterface").transform.Find(Const.GUIAvatarButton);
 
             modinfoButton.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
-            modinfoButton.GetComponent<Button>().onClick.AddListener(GuiActions.AvatarInfo());
+            modinfoButton.GetComponent<Button>().onClick.AddListener(GuiActions.AvatarInfo(download));
 
 
 
