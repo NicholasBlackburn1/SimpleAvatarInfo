@@ -58,14 +58,21 @@ namespace TestMod
             MelonLogger.Msg("VRC AVATAR Version" + "=> " + VRC.Core.ApiAvatar.VERSION.ToString());
             MelonLogger.Msg("VRC Avatar unity version" + "=> " + avt.unityVersion);
             settingsCategory = MelonPreferences.CreateCategory("settings");
-            downloadpath = (MelonPreferences_Entry<string>)settingsCategory.CreateEntry("downloadpath", "C:examplepath");
+            downloadpath = (MelonPreferences_Entry<string>)settingsCategory.CreateEntry("downloadpath", @"D:\ripped vrc avatars\Unextracted avatars");
 
             // simople 
-            if (downloadpath != null)
+            if (downloadpath == null)
             {
+                MelonLogger.Msg("Saving config file to disk....");
+                MelonLogger.LogWarning("OwO saved it");
                 MelonPreferences.Save();
 
+
             }
+            else
+            {
+                MelonLogger.Warning("Download path from config file is " + " " + TestMod.downloadpath.Value);
+;            }
         }
 
         public override void OnSceneWasLoaded(int buildindex, string sceneName) // Runs when a Scene has Loaded and is passed the Scene's Build Index and Name.
