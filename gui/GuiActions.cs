@@ -147,11 +147,7 @@ namespace TestMod.gui
                 MelonLogger.Msg("-------MOD INFORMATION---------");
                 MelonLogger.Msg(" Version" + " " + "1.0.0");
 
-                VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Mod Info", modInfo(), "Thankies for downloading", new Action(() =>
-                {
-                    MelonLogger.Msg("Opened mod menu");
-                    
-                }));
+                VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_Single_1("Mod Info", modInfo());
 
             });
         }
