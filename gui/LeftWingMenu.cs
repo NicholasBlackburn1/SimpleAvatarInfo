@@ -113,14 +113,14 @@ namespace TestMod.gui
 
         // this will dump avatar info and should display it 
         // TODO: get data to be displayed from avatar
-        public IEnumerator OnAvatarCloneButtonPress()
+        public IEnumerator OnAvatarCloneButtonPress(string download)
         {
             // whenever the usermanage face is avctive 
             while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
             Transform modinfoButton = GameObject.Find("UserInterface").transform.Find(Const.GUIClone);
 
             modinfoButton.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
-            modinfoButton.GetComponent<Button>().onClick.AddListener(GuiActions.CloneAvatar(TestMod.downloadpath.Value));
+            modinfoButton.GetComponent<Button>().onClick.AddListener(GuiActions.CloneAvatar(download));
 
           
             

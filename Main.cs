@@ -72,7 +72,7 @@ namespace TestMod
             else
             {
                 MelonLogger.Warning("Download path from config file is " + " " + TestMod.downloadpath.Value);
-;            }
+                ; }
         }
 
         public override void OnSceneWasLoaded(int buildindex, string sceneName) // Runs when a Scene has Loaded and is passed the Scene's Build Index and Name.
@@ -101,7 +101,7 @@ namespace TestMod
         }
 
         public override void OnLateUpdate() // Runs once per frame after OnUpdate and OnFixedUpdate have finished.
-        {   
+        {
 
 
         }
@@ -142,8 +142,8 @@ namespace TestMod
         // loading for mod 
         public void OnLoadGui()
         {
-          
-            
+
+
         }
 
         // this holds the running stuff for my vrchat mod
@@ -151,7 +151,7 @@ namespace TestMod
         {
             LeftWingMenu gui = new LeftWingMenu();
             ModGuiWindow window = new ModGuiWindow();
-         
+
 
             MelonCoroutines.Start(gui.OnMainTitleRun("text UwU~...."));
             MelonCoroutines.Start(gui.OnLeftWingTitle("text In left wing~...."));
@@ -160,7 +160,7 @@ namespace TestMod
             MelonCoroutines.Start(gui.OnFirstButtonTitle());
             MelonCoroutines.Start(gui.OnSecondButtonTitle());
             MelonCoroutines.Start(gui.OnThirdButtonTitle());
-         
+
 
 
 
@@ -174,12 +174,12 @@ namespace TestMod
 
             MelonCoroutines.Start(gui.OnModInfoButtonPress());
             MelonCoroutines.Start(gui.OnAvatarInfoButtonPress(TestMod.downloadpath.Value));
-            MelonCoroutines.Start(gui.OnAvatarCloneButtonPress(TestMod.downloadpath.Value)));
+            MelonCoroutines.Start(gui.OnAvatarCloneButtonPress(TestMod.downloadpath.Value));
 
-            
+
         }
 
 
-    }
-}
+    } }
+
 
