@@ -155,7 +155,7 @@ namespace SimpleAvatarInfo.gui
                 MelonLogger.Msg("Need to set up the file download path time to to use gui to set it up~");
 
                 // tbis 
-                ShowInputPopupWithCancel(VRCUiPopupManager.prop_VRCUiPopupManager_0, "Avatar Download Location", "Enter a windows path dir to dump avatar files to", InputField.InputType.Standard, true, "Submit", (s, k, t) =>
+                ShowInputPopupWithCancel(VRCUiPopupManager.prop_VRCUiPopupManager_0, "Avatar Download Location", "Enter a windows path dir to dump avatar files to", InputField.InputType.Standard, false, "Submit", (s, k, t) =>
                 {
 
                     if (string.IsNullOrEmpty(s))
