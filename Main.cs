@@ -150,7 +150,7 @@ namespace SimpleAvatarInfo
         public void RegisterGuiLayout()
         {
             LeftWingMenu gui = new LeftWingMenu();
-            ModGuiWindow window = new ModGuiWindow();
+          
 
 
             MelonCoroutines.Start(gui.OnMainTitleRun("text UwU~...."));
@@ -171,8 +171,7 @@ namespace SimpleAvatarInfo
         public void RegisterGuiActions()
         {
             LeftWingMenu gui = new LeftWingMenu();
-            PlayerStuff stuff = new PlayerStuff();
-
+           
             MelonCoroutines.Start(gui.OnModInfoButtonPress());
             MelonCoroutines.Start(gui.OnAvatarInfoButtonPress(SimpleAvatarInfo.downloadpath.Value));
             MelonCoroutines.Start(gui.OnAvatarCloneButtonPress(SimpleAvatarInfo.downloadpath.Value));
