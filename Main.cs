@@ -58,7 +58,7 @@ namespace SimpleAvatarInfo
             MelonLogger.Msg("VRC AVATAR Version" + "=> " + VRC.Core.ApiAvatar.VERSION.ToString());
             MelonLogger.Msg("VRC Avatar unity version" + "=> " + avt.unityVersion);
             settingsCategory = MelonPreferences.CreateCategory("settings");
-            downloadpath = (MelonPreferences_Entry<string>)settingsCategory.CreateEntry("downloadpath", @"D:\ripped vrc avatars\Unextracted avatars");
+            downloadpath = (MelonPreferences_Entry<string>)settingsCategory.CreateEntry("downloadpath", "EnterPath");
 
             // simople 
             if (downloadpath == null)

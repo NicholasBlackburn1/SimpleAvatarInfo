@@ -18,53 +18,32 @@ using VRC.UI;
 
 namespace SimpleAvatarInfo.utils
 {
-    class PlayerStuff { 
-        private readonly List<string> myJoinNames = new List<string>();
-        private readonly List<string> myLeaveNames = new List<string>();
-
-        
-
-        private int myLastLevelLoad;
-        private bool myObservedLocalPlayerJoin;
-
-           
-
-        // this allows me to do stuff when the player joins 
-        public void OnPlayerJoined(Player player)
+    class PlayerStuff
+    { 
+       public static void InitializeNetworkManager()
         {
-           
-                var apiUser = player.prop_APIUser_0;
-
-            if (apiUser == null) return;
-
-            if (APIUser.CurrentUser.id == apiUser.id)
+            var playerJoinedDelegate = NetworkManager.field_Internal_Static_NetworkManager_0.field_Internal_VRCEventDelegate_1_Player_0;
+            var playerLeftDelegate = NetworkManager.field_Internal_Static_NetworkManager_0.field_Internal_VRCEventDelegate_1_Player_1;
+            playerJoinedDelegate.field_Private_HashSet_1_UnityAction_1_T_0.Add(new Action<Player>(p =>
             {
-                myObservedLocalPlayerJoin = true;
-                myLastLevelLoad = Environment.TickCount;
-            }
+                if (p != null) OnPlayerJoin(p);
+            }));
 
-            if (!myObservedLocalPlayerJoin || Environment.TickCount - myLastLevelLoad < 5_000)
+            playerLeftDelegate.field_Private_HashSet_1_UnityAction_1_T_0.Add(new Action<Player>(p =>
             {
-            };
-
-            
-            var playerName = apiUser.displayName ?? "!null!";
-
-            MelonLogger.Msg(ConsoleColor.DarkMagenta+" A person Joined there name is "+" " +playerName.ToString());
+                if (p != null) OnPlayerLeft(p);
+            }));
         }
 
 
-        public void OnPlayerLeft(Player player)
+        public static void OnPlayerJoin(Player player)
         {
-            var apiUser = player.prop_APIUser_0;
-            if (apiUser == null) return;
-            if (Environment.TickCount - myLastLevelLoad < 5_000) return;
 
-
-            var playerName = apiUser.displayName ?? "!null!";
-
-            MelonLogger.Msg(ConsoleColor.DarkMagenta + "A person Left there name is" + " " + playerName.ToString());
         }
 
+        public static void OnPlayerLeft(Player player)
+        {
+
+        }
     }
 }

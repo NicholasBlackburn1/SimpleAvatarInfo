@@ -22,7 +22,19 @@ namespace SimpleAvatarInfo.gui
 {
     class GuiActions
     {
-      
+
+
+        // Allows me to easly create popup menu for input
+        public static void ShowInputPopupWithCancel(this VRCUiPopupManager popupManager, string title, string preFilledText,
+            InputField.InputType inputType, bool useNumericKeypad, string submitButtonText,
+            Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text> submitButtonAction,
+            Action cancelButtonAction, string placeholderText = "Enter text....")
+        {
+            popupManager.Method_Public_Void_String_String_InputType_Boolean_String_Action_3_String_List_1_KeyCode_Text_Action_String_Boolean_Action_1_VRCUiPopup_Boolean_Int32_0(
+                    title,
+                    preFilledText,
+                    inputType, useNumericKeypad, submitButtonText, submitButtonAction, cancelButtonAction, placeholderText, true, null);
+        }
 
 
         // This allows me to dump public and private avi's to the console
@@ -174,8 +186,25 @@ namespace SimpleAvatarInfo.gui
         {
             using (var client = new WebClient())
             {
+
+                if(SimpleAvatarInfo.downloadpath.Value == "EnterPath"){
+                    MelonLogger.Msg("Need to set up the file download path time to to use gui to set it up~");
+
+                    ShowInputPopupWithCancel(VRCUiPopupManager.prop_VRCUiPopupManager_0, "Goto Page", string.Empty, InputField.InputType.Standard, true, "Submit", (s, k, t) =>
+                    {
+                        
+
+                    },
+                    new Action(() => { 
+                    
+                    }));
+
+
+                }
+
                 MelonLogger.Warning("Starting Downloading File named" + " " + path + @"\" + avatarname + ".vrca");
 
+                // sets and handles the vrca download with webclient 
                 System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls | System.Net.SecurityProtocolType.Tls11 | System.Net.SecurityProtocolType.Tls12;
                 var startTime = DateTime.Now;
                 client.Headers.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0)");
@@ -185,10 +214,11 @@ namespace SimpleAvatarInfo.gui
                 MelonLogger.Warning("It took about" + " " + elapsedTime + " " + " to download the avatar " + avatarname + "\n");
                 MelonLogger.Msg("Done Downloading File named" + " " + path + @"\" + avatarname + ".vrca");
                 client.Dispose();
-                VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_Single_1("Avatar Download Time", "It took about" + ",\n" + "Time Taken:"+ elapsedTime + ",\n" +" To download "+ "Avatar name: " + avatarname + "\n");
 
+                ShowInputPopupWithCancel(VRCUiManager.prop_VRCUiManager_0, "Avatar Save Path", "Please Enter a Path to your avatars","Save Avatar path");
             }
         }
+
 
         // Avatar uwu
         private static string avatarInfoString(string avatarID, string avatarName, string avatarURL, string status)
