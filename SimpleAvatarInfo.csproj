@@ -160,10 +160,10 @@
   <ItemGroup>
     <Compile Include="avatar\AvatarStuff.cs" />
     <Compile Include="Const.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="gui\GuiActions.cs" />
     <Compile Include="gui\ModGuiWindow.cs" />
     <Compile Include="gui\LeftWingMenu.cs" />
-    <Compile Include="utils\NetworkManagerHooks.cs" />
     <Compile Include="utils\PlayerStuff.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main.cs" />
@@ -178,6 +178,7 @@
     <Content Include="UnityEngine.UIModule.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".editorconfig" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -20,22 +21,19 @@ using AvatarList = Il2CppSystem.Collections.Generic.List<VRC.Core.ApiAvatar>;
  * **/
 namespace SimpleAvatarInfo.gui
 {
-    class GuiActions
+    public static class GuiActions
     {
 
-
-        // Allows me to easly create popup menu for input
         public static void ShowInputPopupWithCancel(this VRCUiPopupManager popupManager, string title, string preFilledText,
-            InputField.InputType inputType, bool useNumericKeypad, string submitButtonText,
-            Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text> submitButtonAction,
-            Action cancelButtonAction, string placeholderText = "Enter text....")
+           InputField.InputType inputType, bool useNumericKeypad, string submitButtonText,
+           Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text> submitButtonAction,
+           Action cancelButtonAction, string placeholderText = "Enter text....")
         {
             popupManager.Method_Public_Void_String_String_InputType_Boolean_String_Action_3_String_List_1_KeyCode_Text_Action_String_Boolean_Action_1_VRCUiPopup_Boolean_Int32_0(
                     title,
                     preFilledText,
                     inputType, useNumericKeypad, submitButtonText, submitButtonAction, cancelButtonAction, placeholderText, true, null);
         }
-
 
         // This allows me to dump public and private avi's to the console
         public static Action CloneAvatar(string downloadlocal)
@@ -59,22 +57,21 @@ namespace SimpleAvatarInfo.gui
                 if (menuController.activeAvatar.releaseStatus == "private")
                 {
                     avatarPage.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar { id = avatarID };
-                    DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Private"); 
-                    
+                    DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Private");
+
                     // Warning message for cloning a private avatar
                     VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Private Avatar!", "You really can't clone a Private avatar vrchat is not made that way. Download it insted", "OwO Do it ", new Action(() =>
                     {
                         MelonLogger.Msg("Downloading Private  Avi...");
                         Downloader(avatarURL, avatarName, downloadlocal);
 
-                    }),null);
+                    }), null);
 
                 } 
                 else
                 {
 
                     avatarPage.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar { id = avatarID };
-                    
                     DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Public");
 
                     // Warning message for cloning a private avatar
@@ -82,7 +79,7 @@ namespace SimpleAvatarInfo.gui
                     {
                         MelonLogger.Msg("Cloneing Avi...");
                         avatarPage.ChangeToSelectedAvatar();
-                       
+
                     }), null);
 
                 }
@@ -90,7 +87,6 @@ namespace SimpleAvatarInfo.gui
             });
 
 
-         
         }
 
         public static Action AvatarInfo(string downloadlocal)
@@ -101,7 +97,6 @@ namespace SimpleAvatarInfo.gui
                 PageWorldInfo pageWorldInfo = screens.Find("WorldInfo").GetComponent<PageWorldInfo>();
                 MenuController menuController = pageWorldInfo.field_Public_MenuController_0;
                 PageAvatar avatarPage = screens.Find("Avatar").GetComponent<PageAvatar>();
-        
 
                 // avatar info
 
@@ -122,7 +117,7 @@ namespace SimpleAvatarInfo.gui
                     {
                         MelonLogger.Msg("Downloading avatar..");
                         Downloader(avatarURL, avatarName, downloadlocal);
-                        
+
                     }), null);
 
                 }
@@ -138,7 +133,7 @@ namespace SimpleAvatarInfo.gui
                     {
                         MelonLogger.Msg("Downloading avatar...");
                         Downloader(avatarURL, avatarName, downloadlocal);
-                      
+
 
                     }), null);
 
@@ -156,7 +151,6 @@ namespace SimpleAvatarInfo.gui
         {
             return new Action(() =>
             {
-                
                 MelonLogger.Msg("-------MOD INFORMATION---------");
                 MelonLogger.Msg(" Version" + " " + "1.0.0");
 
@@ -190,13 +184,36 @@ namespace SimpleAvatarInfo.gui
                 if(SimpleAvatarInfo.downloadpath.Value == "EnterPath"){
                     MelonLogger.Msg("Need to set up the file download path time to to use gui to set it up~");
 
-                    ShowInputPopupWithCancel(VRCUiPopupManager.prop_VRCUiPopupManager_0, "Goto Page", string.Empty, InputField.InputType.Standard, true, "Submit", (s, k, t) =>
+                    // tbis 
+                    ShowInputPopupWithCancel(VRCUiPopupManager.prop_VRCUiPopupManager_0, "Avatar Download Location", "Enter a windows path dir to dump avatar files to", InputField.InputType.Standard, true, "Submit", (s, k, t) =>
                     {
-                        
+
+                        if (string.IsNullOrEmpty(s))
+                            return;
+
+                        try
+                        {
+                            MelonLogger.Msg("PAth is for download local" + " " + Path.GetFullPath(@s));
+
+                            if (Path.GetFullPath(@s) != null)
+                            {
+                                SimpleAvatarInfo.downloadpath.Value = @s;
+                            }
+                            else
+                            {
+                                MelonLogger.Warning("File path is not valid please fix the path");
+                            }
+                        }
+
+                        catch (Exception e)
+                        {
+                            MelonLogger.Warning(e.Message);
+                        }
+
 
                     },
-                    new Action(() => { 
-                    
+                    new Action(() => {
+
                     }));
 
 
@@ -214,11 +231,10 @@ namespace SimpleAvatarInfo.gui
                 MelonLogger.Warning("It took about" + " " + elapsedTime + " " + " to download the avatar " + avatarname + "\n");
                 MelonLogger.Msg("Done Downloading File named" + " " + path + @"\" + avatarname + ".vrca");
                 client.Dispose();
+                VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_Single_1("Avatar Download Time", "It took about" + ",\n" + "Time Taken:"+ elapsedTime + ",\n" +" To download "+ "Avatar name: " + avatarname + "\n");
 
-                ShowInputPopupWithCancel(VRCUiManager.prop_VRCUiManager_0, "Avatar Save Path", "Please Enter a Path to your avatars","Save Avatar path");
             }
         }
-
 
         // Avatar uwu
         private static string avatarInfoString(string avatarID, string avatarName, string avatarURL, string status)
@@ -232,7 +248,7 @@ namespace SimpleAvatarInfo.gui
             return "ModName: " + BuildInfo.Name + "\n" + " Author: " + BuildInfo.Author + "\n" + "Version: " + BuildInfo.Version + "\n" + "Mod Url: "+ BuildInfo.DownloadLink +  " \n";
         }
 
-    
+
     }
  
 }
