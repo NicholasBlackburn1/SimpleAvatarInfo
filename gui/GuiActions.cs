@@ -35,6 +35,8 @@ namespace SimpleAvatarInfo.gui
                     inputType, useNumericKeypad, submitButtonText, submitButtonAction, cancelButtonAction, placeholderText, true, null);
         }
 
+
+
         // This allows me to dump public and private avi's to the console
         public static Action CloneAvatar(string downloadlocal)
         {
@@ -146,6 +148,44 @@ namespace SimpleAvatarInfo.gui
         }
 
 
+        public static Action changFileLocal()
+        {
+            return new Action(() =>
+            {
+                MelonLogger.Msg("Need to set up the file download path time to to use gui to set it up~");
+
+                // tbis 
+                ShowInputPopupWithCancel(VRCUiPopupManager.prop_VRCUiPopupManager_0, "Avatar Download Location", "Enter a windows path dir to dump avatar files to", InputField.InputType.Standard, true, "Submit", (s, k, t) =>
+                {
+
+                    if (string.IsNullOrEmpty(s))
+                        return;
+
+                    try
+                    {
+                        MelonLogger.Msg("PAth is for download local" + " " + Path.GetFullPath(@s));
+
+                        if (Path.GetFullPath(@s) != null)
+                        {
+                            SimpleAvatarInfo.downloadpath.Value = @s;
+                        }
+                        else
+                        {
+                            MelonLogger.Warning("File path is not valid please fix the path");
+                        }
+                    }
+
+                    catch (Exception e)
+                    {
+                        MelonLogger.Warning(e.Message);
+                    }
+
+
+                }, new Action(() => {}));
+            });
+        }
+
+
         // this should launch my new menu 
         public static Action openModInfoMenu()
         {
@@ -181,59 +221,36 @@ namespace SimpleAvatarInfo.gui
             using (var client = new WebClient())
             {
 
-                if(SimpleAvatarInfo.downloadpath.Value == "EnterPath"){
-                    MelonLogger.Msg("Need to set up the file download path time to to use gui to set it up~");
+                string keyvalue = SimpleAvatarInfo.downloadpath.Value;
+                
 
-                    // tbis 
-                    ShowInputPopupWithCancel(VRCUiPopupManager.prop_VRCUiPopupManager_0, "Avatar Download Location", "Enter a windows path dir to dump avatar files to", InputField.InputType.Standard, true, "Submit", (s, k, t) =>
-                    {
+ 
 
-                        if (string.IsNullOrEmpty(s))
-                            return;
+                downloadavirn(path, avatarname, avatarurl, client);
 
-                        try
-                        {
-                            MelonLogger.Msg("PAth is for download local" + " " + Path.GetFullPath(@s));
-
-                            if (Path.GetFullPath(@s) != null)
-                            {
-                                SimpleAvatarInfo.downloadpath.Value = @s;
-                            }
-                            else
-                            {
-                                MelonLogger.Warning("File path is not valid please fix the path");
-                            }
-                        }
-
-                        catch (Exception e)
-                        {
-                            MelonLogger.Warning(e.Message);
-                        }
-
-
-                    },
-                    new Action(() => {
-
-                    }));
-
-
-                }
-
-                MelonLogger.Warning("Starting Downloading File named" + " " + path + @"\" + avatarname + ".vrca");
-
-                // sets and handles the vrca download with webclient 
-                System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls | System.Net.SecurityProtocolType.Tls11 | System.Net.SecurityProtocolType.Tls12;
-                var startTime = DateTime.Now;
-                client.Headers.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0)");
-                client.DownloadFileAsync(new Uri(avatarurl), path + @"\" + avatarname + ".vrca");
-                var elapsedTime = (DateTime.Now - startTime).TotalSeconds;
-
-                MelonLogger.Warning("It took about" + " " + elapsedTime + " " + " to download the avatar " + avatarname + "\n");
-                MelonLogger.Msg("Done Downloading File named" + " " + path + @"\" + avatarname + ".vrca");
-                client.Dispose();
-                VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_Single_1("Avatar Download Time", "It took about" + ",\n" + "Time Taken:"+ elapsedTime + ",\n" +" To download "+ "Avatar name: " + avatarname + "\n");
-
+                
             }
+        }
+
+
+
+        // downloads and saves vrc avatar
+        public static void downloadavirn(string path, string avatarname, string avatarurl, WebClient client)
+        {
+            MelonLogger.Warning("Starting Downloading File named" + " " + path + @"\" + avatarname + ".vrca");
+
+            // sets and handles the vrca download with webclient 
+            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls | System.Net.SecurityProtocolType.Tls11 | System.Net.SecurityProtocolType.Tls12;
+            var startTime = DateTime.Now;
+            client.Headers.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0)");
+            client.DownloadFileAsync(new Uri(avatarurl), path + @"\" + avatarname + ".vrca");
+            var elapsedTime = (DateTime.Now - startTime).TotalSeconds;
+
+            MelonLogger.Warning("It took about" + " " + elapsedTime + " " + " to download the avatar " + avatarname + "\n");
+            MelonLogger.Msg("Done Downloading File named" + " " + path + @"\" + avatarname + ".vrca");
+            client.Dispose();
+            VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_Single_1("Avatar Download Time", "It took about" + ",\n" + "Time Taken:" + elapsedTime + ",\n" + " To download " + "Avatar name: " + avatarname + "\n");
+
         }
 
         // Avatar uwu

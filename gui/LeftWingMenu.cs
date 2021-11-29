@@ -85,6 +85,19 @@ namespace SimpleAvatarInfo.gui
 
         }
 
+
+
+        public IEnumerator OnFourthButtonTitle()
+        {
+            // whenever the usermanage face is avctive 
+            while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
+            GameObject pub = GameObject.Find("UserInterface");
+
+            Transform Main_Menu_title = GameObject.Find("UserInterface").transform.Find(Const.LeftwingFourthButton);
+            Main_Menu_title.GetComponent<TMPro.TextMeshProUGUI>().text = Const.Path;
+
+        }
+
         public IEnumerator stuff()
         {
             // whenever the usermanage face is avctive 
@@ -135,6 +148,21 @@ namespace SimpleAvatarInfo.gui
 
             modinfoButton.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
             modinfoButton.GetComponent<Button>().onClick.AddListener(GuiActions.AvatarInfo(download));
+
+
+
+        }
+
+
+
+        public IEnumerator OnSetAvatarPathButtonPress()
+        {
+            // whenever the usermanage face is avctive 
+            while (GameObject.Find("UserInterface").GetComponentInChildren<VRC.UI.Elements.QuickMenu>(true) == null) yield return null;
+            Transform modinfoButton = GameObject.Find("UserInterface").transform.Find(Const.GUIPath);
+
+            modinfoButton.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
+            modinfoButton.GetComponent<Button>().onClick.AddListener(GuiActions.changFileLocal());
 
 
 

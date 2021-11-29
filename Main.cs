@@ -160,6 +160,7 @@ namespace SimpleAvatarInfo
             MelonCoroutines.Start(gui.OnFirstButtonTitle());
             MelonCoroutines.Start(gui.OnSecondButtonTitle());
             MelonCoroutines.Start(gui.OnThirdButtonTitle());
+            MelonCoroutines.Start(gui.OnFourthButtonTitle());
 
 
 
@@ -175,6 +176,7 @@ namespace SimpleAvatarInfo
             MelonCoroutines.Start(gui.OnModInfoButtonPress());
             MelonCoroutines.Start(gui.OnAvatarInfoButtonPress(SimpleAvatarInfo.downloadpath.Value));
             MelonCoroutines.Start(gui.OnAvatarCloneButtonPress(SimpleAvatarInfo.downloadpath.Value));
+            MelonCoroutines.Start(gui.OnSetAvatarPathButtonPress());
 
 
         }

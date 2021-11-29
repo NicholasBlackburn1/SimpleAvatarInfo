@@ -27,7 +27,7 @@ namespace SimpleAvatarInfo
         public const string GUIModButton = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Profile";
         public const string GUIAvatarButton = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Friends";
         public const string GUIClone="Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Avatars";
-
+        public const string GUIPath = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Emoji";
         // Main Quick Menu Object Locations 
         public const string QuickMenuParent = "Canvas_QuickMenu(Clone)";
         public const string QuickMenuDashBoad = "Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard";
@@ -52,6 +52,7 @@ namespace SimpleAvatarInfo
         public const string ModTitle = "Nickys Mod Owo~";
         public const string AviInfo = "Avatar Info";
         public const string Graphing = "Avatar Cloneing";
+        public const string Path = "Avatar Save Path";
 
         // Wing menu ele,ents
         public const string Leftwingtitlepath = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/WngHeader_H1/LeftItemContainer/Text_Title";
@@ -59,8 +60,8 @@ namespace SimpleAvatarInfo
         public const string LeftwingFirstButtonTitle = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Profile/Container/Text_QM_H3";
         public const string LeftwingSecondButtonTitle = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Friends/Container/Text_QM_H3";
         public const string LeftwingThirdButton = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Avatars/Container/Text_QM_H3";
+        public const string LeftwingFourthButton = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/ScrollRect/Viewport/VerticalLayoutGroup/Button_Emoji/Container/Text_QM_H3";
 
-      
     }   
         
 }
