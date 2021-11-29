@@ -1,8 +1,19 @@
-### GENERAL INFORMATION:
+### Simple avatar info 
+- this mod allows the user to view and clone / rip the avatar from vrchat 
 
-- An Example Mod for [MelonLoader](https://github.com/LavaGang/MelonLoader).
 
----
+### How to use 
+- go into vrchat with this mod in the mods folder and click on the left wing menu and one of the 4 buttons
+- avatar info
+- avatar cloning
+- mod info
+- Download path
+
+
+## Why did i make it 
+- to learn about vrchat 
+- to make a usefull mod for helping people and myself
+- OwO what is this a amazing foxy girl developer 
 
 ### LICENSING & CREDITS:
 
