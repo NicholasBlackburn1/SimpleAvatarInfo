@@ -12,8 +12,8 @@ using MelonLoader;
 using Mono.CSharp;
 using System;
 using System.Collections;
-using TestMod.gui;
-using TestMod.utils;
+using SimpleAvatarInfo.gui;
+using SimpleAvatarInfo.utils;
 using UnityEngine;
 using VRC;
 using VRC.Core;
@@ -22,7 +22,7 @@ using VRC.UI.Core;
 using VRC.UI.Elements;
 
 
-namespace TestMod
+namespace SimpleAvatarInfo
 {
     public static class BuildInfo
     {
@@ -37,11 +37,11 @@ namespace TestMod
 
     }
 
-    public class TestMod : MelonMod
+    public class SimpleAvatarInfo : MelonMod
     {
 
         public const string dataHeader = "Captured Data ->";
-        private AvatarStuff avatarstuff = new AvatarStuff();
+       
         private LeftWingMenu gui = new LeftWingMenu();
         public static MelonPreferences_Category settingsCategory;
         public static MelonPreferences_Entry<string> downloadpath;
@@ -71,7 +71,7 @@ namespace TestMod
             }
             else
             {
-                MelonLogger.Warning("Download path from config file is " + " " + TestMod.downloadpath.Value);
+                MelonLogger.Warning("Download path from config file is " + " " + SimpleAvatarInfo.downloadpath.Value);
                 ; }
         }
 
@@ -173,8 +173,8 @@ namespace TestMod
             PlayerStuff stuff = new PlayerStuff();
 
             MelonCoroutines.Start(gui.OnModInfoButtonPress());
-            MelonCoroutines.Start(gui.OnAvatarInfoButtonPress(TestMod.downloadpath.Value));
-            MelonCoroutines.Start(gui.OnAvatarCloneButtonPress(TestMod.downloadpath.Value));
+            MelonCoroutines.Start(gui.OnAvatarInfoButtonPress(SimpleAvatarInfo.downloadpath.Value));
+            MelonCoroutines.Start(gui.OnAvatarCloneButtonPress(SimpleAvatarInfo.downloadpath.Value));
 
 
         }

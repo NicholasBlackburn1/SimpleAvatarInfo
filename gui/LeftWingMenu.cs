@@ -9,13 +9,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using VRC.Core;
 using VRC.UI;
-using TestMod.utils;
+using SimpleAvatarInfo.utils;
 using VRChatUtilityKit.Ui;
 
 /*
  This class is for handling all my gui goodies Uwu
  */
-namespace TestMod.gui
+namespace SimpleAvatarInfo.gui
 
 {
     class LeftWingMenu

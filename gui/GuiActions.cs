@@ -18,7 +18,7 @@ using AvatarList = Il2CppSystem.Collections.Generic.List<VRC.Core.ApiAvatar>;
 /*
  * this is the actions class for my gui UwU this will allow me to link certin stuff to my vrchat buttons 
  * **/
-namespace TestMod.gui
+namespace SimpleAvatarInfo.gui
 {
     class GuiActions
     {

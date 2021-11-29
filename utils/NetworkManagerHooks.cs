@@ -10,7 +10,8 @@ using VRC.Core;
 /**
  this class is for handlng my networkd hooks for join notifier and etc
  */
-namespace TestMod.utils
+namespace
+    SimpleAvatarInfo.utils
 {
 
         public static class NetworkManagerHooks

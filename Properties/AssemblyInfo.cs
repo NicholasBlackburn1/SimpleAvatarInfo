@@ -1,15 +1,15 @@
 ﻿using System.Reflection;
 using MelonLoader;
 
-[assembly: AssemblyTitle(TestMod.BuildInfo.Description)]
-[assembly: AssemblyDescription(TestMod.BuildInfo.Description)]
-[assembly: AssemblyCompany(TestMod.BuildInfo.Company)]
-[assembly: AssemblyProduct(TestMod.BuildInfo.Name)]
-[assembly: AssemblyCopyright("Created by " + TestMod.BuildInfo.Author)]
-[assembly: AssemblyTrademark(TestMod.BuildInfo.Company)]
-[assembly: AssemblyVersion(TestMod.BuildInfo.Version)]
-[assembly: AssemblyFileVersion(TestMod.BuildInfo.Version)]
-[assembly: MelonInfo(typeof(TestMod.TestMod), TestMod.BuildInfo.Name, TestMod.BuildInfo.Version, TestMod.BuildInfo.Author, TestMod.BuildInfo.DownloadLink)]
+[assembly: AssemblyTitle("SimpleAvatarInfo.BuildInfo.Description")]
+[assembly: AssemblyDescription("SimpleAvatarInfo.BuildInfo.Description")]
+[assembly: AssemblyCompany("SimpleAvatarInfo.BuildInfo.Company")]
+[assembly: AssemblyProduct("SimpleAvatarInfo.BuildInfo.Name")]
+[assembly: AssemblyCopyright("SimpleAvatarInfo.BuildInfo.Author")]
+[assembly: AssemblyTrademark("SimpleAvatarInfo.BuildInfo.Company")]
+[assembly: AssemblyVersion(SimpleAvatarInfo.BuildInfo.Version)]
+[assembly: AssemblyFileVersion(SimpleAvatarInfo.BuildInfo.Version)]
+[assembly: MelonInfo(typeof(SimpleAvatarInfo.SimpleAvatarInfo), SimpleAvatarInfo.BuildInfo.Name, SimpleAvatarInfo.BuildInfo.Version, SimpleAvatarInfo.BuildInfo.Author, SimpleAvatarInfo.BuildInfo.DownloadLink)]
 [assembly: MelonColor()]
 
 // Create and Setup a MelonGame Attribute to mark a Melon as Universal or Compatible with specific Games.

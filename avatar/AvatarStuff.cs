@@ -7,7 +7,7 @@ using VRC.Core;
 using Newtonsoft.Json;
 
 
-namespace TestMod
+namespace SimpleAvatarInfo
 {
     class AvatarStuff
     {

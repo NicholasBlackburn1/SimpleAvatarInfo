@@ -18,7 +18,7 @@ using MelonLoader;
 using TMPro;
 using UnityEngine.UI;
 
-namespace TestMod.utils
+namespace SimpleAvatarInfo.utils
 {
 
 

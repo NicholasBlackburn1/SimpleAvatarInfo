@@ -11,7 +11,7 @@ using UnityEngine;
 /*
  * this class will hold all the big gui stuff like 
  * **/
-namespace TestMod.gui
+namespace SimpleAvatarInfo.gui
 {
     class ModGuiWindow
     {
