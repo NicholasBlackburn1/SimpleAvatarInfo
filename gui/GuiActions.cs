@@ -50,7 +50,7 @@ namespace SimpleAvatarInfo.gui
                     DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Private");
                     
                     // Warning message for cloning a private avatar
-                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Private Avatar!", "You really can't clone a Private avatar vrchat is not mad that way. Download it insted", "OwO Do it ", new Action(() =>
+                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Private Avatar!", "You really can't clone a Private avatar vrchat is not made that way. Download it insted", "OwO Do it ", new Action(() =>
                     {
                         MelonLogger.Msg("Downloading Private  Avi...");
                         Downloader(avatarURL, avatarName, downloadlocal);
