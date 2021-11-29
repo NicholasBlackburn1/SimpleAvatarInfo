@@ -82,7 +82,7 @@ namespace TestMod
 
         public override void OnSceneWasInitialized(int buildindex, string sceneName) // Runs when a Scene has Initialized and is passed the Scene's Build Index and Name.
         {
-            OnLoadGui();
+
             RegisterGuiLayout();
 
 
