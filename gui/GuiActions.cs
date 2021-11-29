@@ -47,7 +47,7 @@ namespace SimpleAvatarInfo.gui
                 if (menuController.activeAvatar.releaseStatus == "private")
                 {
                     avatarPage.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar { id = avatarID };
-                    DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Private");
+                    DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Private"); 
                     
                     // Warning message for cloning a private avatar
                     VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Private Avatar!", "You really can't clone a Private avatar vrchat is not made that way. Download it insted", "OwO Do it ", new Action(() =>
