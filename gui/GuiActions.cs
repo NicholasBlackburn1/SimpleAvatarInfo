@@ -177,9 +177,16 @@ namespace SimpleAvatarInfo.gui
                 MelonLogger.Warning("Starting Downloading File named" + " " + path + @"\" + avatarname + ".vrca");
 
                 System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls | System.Net.SecurityProtocolType.Tls11 | System.Net.SecurityProtocolType.Tls12;
+                var startTime = DateTime.Now;
                 client.Headers.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0)");
                 client.DownloadFileAsync(new Uri(avatarurl), path + @"\" + avatarname + ".vrca");
+                var elapsedTime = (DateTime.Now - startTime).TotalSeconds;
+
+                MelonLogger.Warning("It took about" + " " + elapsedTime + " " + " to download the avatar " + avatarname + "\n");
                 MelonLogger.Msg("Done Downloading File named" + " " + path + @"\" + avatarname + ".vrca");
+                client.Dispose();
+                VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_Single_1("Avatar Download Time", "It took about" + ",\n" + "Time Taken:"+ elapsedTime + ",\n" +" To download "+ "Avatar name: " + avatarname + "\n");
+
             }
         }
 
