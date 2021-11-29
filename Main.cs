@@ -174,7 +174,7 @@ namespace TestMod
 
             MelonCoroutines.Start(gui.OnModInfoButtonPress());
             MelonCoroutines.Start(gui.OnAvatarInfoButtonPress(TestMod.downloadpath.Value));
-            MelonCoroutines.Start(gui.OnAvatarCloneButtonPress());
+            MelonCoroutines.Start(gui.OnAvatarCloneButtonPress(TestMod.downloadpath.Value)));
 
             
         }

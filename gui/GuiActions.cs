@@ -26,7 +26,7 @@ namespace TestMod.gui
 
 
         // This allows me to dump public and private avi's to the console
-        public static Action CloneAvatar()
+        public static Action CloneAvatar(string downloadlocal)
         {
             return new Action(() =>
             {
@@ -48,12 +48,13 @@ namespace TestMod.gui
                 {
                     avatarPage.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar { id = avatarID };
                     DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Private");
-
+                    
                     // Warning message for cloning a private avatar
-                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Private Avatar!", "Cloning a Privte avatar is amazing, but be carefull you could get fucked by vrc admins!", "OwO Do it ", new Action(() =>
+                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Private Avatar!", "You really can't clone a Private avatar vrchat is not mad that way. Download it insted", "OwO Do it ", new Action(() =>
                     {
-                        MelonLogger.Msg("Cloneing Avi...");
-                        avatarPage.ChangeToSelectedAvatar();
+                        MelonLogger.Msg("Downloading Private  Avi...");
+                        Downloader(avatarURL, avatarName, downloadlocal);
+
                     }),null);
 
                 } 
@@ -105,11 +106,11 @@ namespace TestMod.gui
                     DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Private");
 
                     // Warning message for cloning a private avatar
-                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Avatar Info!", avatarInfoString(avatarID, avatarName, avatarURL), "Download Avatar ", new Action(() =>
+                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Avatar Info!", avatarInfoString(avatarID, avatarName, avatarURL, "Private"), "Download Avatar ", new Action(() =>
                     {
                         MelonLogger.Msg("Downloading avatar..");
                         Downloader(avatarURL, avatarName, downloadlocal);
-                       
+                        
                     }), null);
 
                 }
@@ -121,7 +122,7 @@ namespace TestMod.gui
                     DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Public");
 
                     // Warning message for cloning a private avatar
-                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Avatar Info!", avatarInfoString(avatarID,avatarName,avatarURL), "Download Avatar", new Action(() =>
+                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Avatar Info!", avatarInfoString(avatarID,avatarName,avatarURL, "Public"), "Download Avatar", new Action(() =>
                     {
                         MelonLogger.Msg("Downloading avatar...");
                         Downloader(avatarURL, avatarName, downloadlocal);
@@ -183,9 +184,9 @@ namespace TestMod.gui
         }
 
         // Avatar uwu
-        private static string avatarInfoString(string avatarID, string avatarName, string avatarURL)
+        private static string avatarInfoString(string avatarID, string avatarName, string avatarURL, string status)
         {
-            return "Avatar ID :" + " " + avatarID + ",\n" + "Avtar Name: " + avatarName + ",\n" + "Avatar URL:" + " " + avatarURL;
+            return  "Avtar Name: " + avatarName + ",\n" +"Shared Status:" + " "+ status+ ",\n" + "Avatar ID :" + " " + avatarID + ",\n" + "Avatar URL:" + " " + avatarURL;
         }
 
         // mod info

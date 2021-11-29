@@ -120,7 +120,7 @@ namespace TestMod.gui
             Transform modinfoButton = GameObject.Find("UserInterface").transform.Find(Const.GUIClone);
 
             modinfoButton.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
-            modinfoButton.GetComponent<Button>().onClick.AddListener(GuiActions.CloneAvatar());
+            modinfoButton.GetComponent<Button>().onClick.AddListener(GuiActions.CloneAvatar(TestMod.downloadpath.Value));
 
           
             
