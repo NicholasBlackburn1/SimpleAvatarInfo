@@ -51,8 +51,8 @@ namespace SimpleAvatarInfo
         public const string ModFirstButton = "Mod Info";
         public const string ModTitle = "Nickys Mod Owo~";
         public const string AviInfo = "Avatar Info";
-        public const string Graphing = "Avatar Cloneing";
-        public const string Path = "Avatar Save Path";
+        public const string Graphing = "Avatar Cloning";
+        public const string Path = "Download Path";
 
         // Wing menu ele,ents
         public const string Leftwingtitlepath = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/WingMenu/WngHeader_H1/LeftItemContainer/Text_Title";
