@@ -30,7 +30,7 @@ namespace SimpleAvatarInfo
         public const string Description = "Mod for Cloning and seeing avatars info "; // Description for the Mod.  (Set as null if none)
         public const string Author = "Nicky Blackburn"; // Author of the Mod.  (MUST BE SET)
         public const string Company = "BlakcburnSoftware"; // Company that made the Mod.  (Set as null if none)
-        public const string Version = "1.0.0"; // Version of the Mod.  (MUST BE SET)
+        public const string Version = "1.0.1.11"; // Version of the Mod.  (MUST BE SET)
         public const string DownloadLink = "https://vrchat.nicholasblackburn.space"; // Download Link for the Mod.  (Set as null if none)
 
 
