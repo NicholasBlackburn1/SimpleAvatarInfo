@@ -11,6 +11,8 @@ namespace SimpleAvatarInfo
 
         public const string ModTogglesTitle= "Enable Data Out";
 
+        // paths for windows stuff
+        public const string Cmdlocal = @"C:\Windows\System32\cmd.exe";
 
         //basic components
         public const string GuiPanal = "Canvas_QuickMenu(Clone)/Container/Window/Wing_Left/Container/InnerContainer/Profile";

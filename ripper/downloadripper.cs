@@ -99,13 +99,12 @@ namespace SimpleAvatarInfo.ripper
                     MelonLogger.Warning("Ripping avatar files from" + $"{filenames}");
                     System.Diagnostics.Process process = new System.Diagnostics.Process();
             
-                    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                 
+                    process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                    process.StartInfo.RedirectStandardOutput = true;
 
-                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                    startInfo.RedirectStandardOutput = true;
-
-                    startInfo.FileName = "cmd.exe";
-                    startInfo.Arguments = baseCommand;
+                    process.StartInfo.FileName = Const.Cmdlocal;
+                    process.StartInfo.Arguments = ("\"" + baseCommand + "\"");
 
                     
                     process.Start();
