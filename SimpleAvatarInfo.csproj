@@ -164,6 +164,7 @@
     <Compile Include="gui\GuiActions.cs" />
     <Compile Include="gui\ModGuiWindow.cs" />
     <Compile Include="gui\LeftWingMenu.cs" />
+    <Compile Include="ripper\downloadripper.cs" />
     <Compile Include="utils\ModUpdater.cs" />
     <Compile Include="utils\PlayerStuff.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

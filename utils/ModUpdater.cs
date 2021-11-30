@@ -27,7 +27,7 @@ namespace SimpleAvatarInfo.utils
         public void DownloadFromGitHub(string fileName)
         {
 
-            MelonLogger.Warning("Path for Updated Mod is at"+AppDomain.CurrentDomain.BaseDirectory + "\\mods\\" + "{fileName}.dll");
+            MelonLogger.Warning("Path for Updated Mod is at"+AppDomain.CurrentDomain.BaseDirectory + "\\Mods\\" + $"{fileName}.dll");
              var sha256 = SHA256.Create();
 
             byte[] bytes = null;
@@ -62,9 +62,9 @@ namespace SimpleAvatarInfo.utils
                     MelonLogger.Error($"No local file exists and unable to download latest version from GitHub. {fileName} will not load!");
                     return;
                 }
-                MelonLogger.Warning($"Couldn't find {fileName}.dll on disk. Saving latest version from GitHub. to the locaton "+ AppDomain.CurrentDomain.BaseDirectory + "\\mods\\" + $"{fileName}.dll");
+                MelonLogger.Warning($"Couldn't find {fileName}.dll on disk. Saving latest version from GitHub. to the locaton "+ AppDomain.CurrentDomain.BaseDirectory + "\\Mods\\" + $"{fileName}.dll");
                 bytes = latestBytes;
-                File.WriteAllBytes(AppDomain.CurrentDomain.BaseDirectory+"\\mods\\"+$"{fileName}.dll", bytes);
+                File.WriteAllBytes(AppDomain.CurrentDomain.BaseDirectory+"\\Mods\\"+$"{fileName}.dll", bytes);
             }
 
 
