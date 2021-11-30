@@ -1,5 +1,6 @@
 ﻿using MelonLoader;
 using System;
+using System.ComponentModel;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
@@ -25,26 +26,48 @@ namespace SimpleAvatarInfo.ripper
 
             // Downolads ripper
 
-            try
+            // Specify a progress notification handler here ...
+            wc.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadFileCallback2);
+
+
+            // Downolads ripper
+
+            wc.DownloadFileAsync(new Uri("https://github.com/ds5678/AssetRipper/releases/download/0.1.8.1/AssetRipperConsole_win64.zip"), AppDomain.CurrentDomain.BaseDirectory + @"\" + $"{fileName}.zip");
+
+
+        }
+        // triggers the extraction
+        private static void DownloadFileCallback2(object sender, AsyncCompletedEventArgs e)
+        {
+            string fileName = "AssetRipperConsole_win64";
+            if (e.Cancelled)
             {
-                wc.DownloadDataAsync(new Uri($"https://github.com/ds5678/AssetRipper/releases/download/0.1.8.1/AssetRipperConsole_win64.zip"), AppDomain.CurrentDomain.BaseDirectory + "\\" + $"{fileName}.zip");
+                MelonLogger.Msg("File download cancelled.");
+            }
+
+            if (e.Error != null)
+            {
+                MelonLogger.Msg(e.Error.ToString());
+            }
+            else
+            {
                 MelonLogger.Msg("Done downloading ripper OwO, time to extract it ");
 
-                ZipFile.ExtractToDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\" + $"{fileName}.zip", AppDomain.CurrentDomain.BaseDirectory + @"\Mods\" + $"{fileName}"+@"\");
+                ZipFile.ExtractToDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\" + $"{fileName}.zip", AppDomain.CurrentDomain.BaseDirectory + @"\Mods\" + $"{fileName}" + @"\");
                 MelonLogger.Msg(ConsoleColor.Green, "OwO Extracted ripper to" + " " + AppDomain.CurrentDomain.BaseDirectory + @"\Mods\" + $"{fileName}");
 
 
             }
-            catch (WebException e)
-            {
-                MelonLogger.Error($"Unable to download latest version of AssetRipper: {e}");
-            }
-        
-    
+
         }
-            
-            // this will be ran when the user downloads the vrca file 
-        public void runRipper(string filenames, string outputdir)
+
+
+
+
+    
+
+    // this will be ran when the user downloads the vrca file 
+    public void runRipper(string filenames, string outputdir)
         {
 
             MelonLogger.Msg(ConsoleColor.DarkMagenta, "Starting to run Ripper Command");
@@ -63,8 +86,8 @@ namespace SimpleAvatarInfo.ripper
                     startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
 
                     startInfo.RedirectStandardOutput = true;
-
-
+                    
+                    process.Start();
                     MelonLogger.Msg("[RIPPER]"+$"{process.StandardOutput.ReadToEnd()}");
 
 
