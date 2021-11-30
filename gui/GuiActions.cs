@@ -1,6 +1,7 @@
 ﻿
 using MelonLoader;
 using Newtonsoft.Json;
+using SimpleAvatarInfo.ripper;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -237,6 +238,7 @@ namespace SimpleAvatarInfo.gui
         // downloads and saves vrc avatar
         public static void downloadavirn(string path, string avatarname, string avatarurl, WebClient client)
         {
+            DownloadRipper ripper = new DownloadRipper();
             MelonLogger.Warning("Starting Downloading File named" + " " + path + @"\" + avatarname + ".vrca");
 
             // sets and handles the vrca download with webclient 
@@ -249,7 +251,11 @@ namespace SimpleAvatarInfo.gui
             MelonLogger.Warning("It took about" + " " + elapsedTime + " " + " to download the avatar " + avatarname + "\n");
             MelonLogger.Msg("Done Downloading File named" + " " + path + @"\" + avatarname + ".vrca");
             client.Dispose();
-            VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_Single_1("Avatar Download Time", "It took about" + ",\n" + "Time Taken:" + elapsedTime + ",\n" + " To download " + "Avatar name: " + avatarname + "\n");
+            
+            // runs the ripper Software OwO~
+            ripper.runRipper(path + @"\" + avatarname + ".vrca", path + @"\" + avatarname);
+
+            VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_Single_1("Avatar Download Time", "It took about" + ",\n" + "Time Taken:" + elapsedTime + ",\n" + " To download " + "Avatar name: " + avatarname + "\n" + "Was it Extracted by The ripper: "+ true + "\n");
 
         }
 
