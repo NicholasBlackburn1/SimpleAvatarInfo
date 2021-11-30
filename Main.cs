@@ -80,7 +80,7 @@ namespace SimpleAvatarInfo
                 ; }
 
             MelonLogger.Warning($"Checking for Mod Updates");
-            updater.DownloadFromGitHub("SimpleAvatarInfo");
+           // updater.DownloadFromGitHub("SimpleAvatarInfo");
 
             MelonLogger.Msg(ConsoleColor.Green, "Updated Mod");
 
