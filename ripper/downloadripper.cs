@@ -88,7 +88,7 @@ namespace SimpleAvatarInfo.ripper
         {
 
             MelonLogger.Msg(ConsoleColor.DarkMagenta, "Starting to run Ripper Command");
-            var baseCommand = ".\\AssetRipperConsole.exe" +" "+ $"{filenames}" + " " + "--output" +" "+ $"{outputdir}" + $"{filenames}";
+            var baseCommand = ".\\AssetRipperConsole.exe" +" "+ $"{filenames}" + " " + "--output" +" "+ $"{outputdir}";
 
             MelonLogger.Msg("command thats going to be ran is" + $"{baseCommand}");
 
