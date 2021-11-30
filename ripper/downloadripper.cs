@@ -22,42 +22,56 @@ namespace SimpleAvatarInfo.ripper
                         "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0"
                 }
             };
+            try
+            {
+
+                // Downolads ripper
+
+                // Specify a progress notification handler here ...
+                wc.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadFileCallback2);
 
 
-            // Downolads ripper
+                // Downolads ripper
 
-            // Specify a progress notification handler here ...
-            wc.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadFileCallback2);
-
-
-            // Downolads ripper
-
-            wc.DownloadFileAsync(new Uri("https://github.com/ds5678/AssetRipper/releases/download/0.1.8.1/AssetRipperConsole_win64.zip"), AppDomain.CurrentDomain.BaseDirectory + @"\" + $"{fileName}.zip");
-
+                wc.DownloadFileAsync(new Uri("https://github.com/ds5678/AssetRipper/releases/download/0.1.8.1/AssetRipperConsole_win64.zip"), AppDomain.CurrentDomain.BaseDirectory + @"\" + $"{fileName}.zip");
+            } catch(Exception e)
+            {
+                MelonLogger.Msg(ConsoleColor.Red, e.Message);
+            }
 
         }
         // triggers the extraction
         private static void DownloadFileCallback2(object sender, AsyncCompletedEventArgs e)
         {
             string fileName = "AssetRipperConsole_win64";
-            if (e.Cancelled)
-            {
-                MelonLogger.Msg("File download cancelled.");
+
+           
+                if (e.Cancelled)
+                {
+                    MelonLogger.Msg("File download cancelled.");
+                }
+
+                if (e.Error != null)
+                {
+                    MelonLogger.Msg(e.Error.ToString());
+                }
+                else
+                {
+                try
+                    {
+                        MelonLogger.Msg("Done downloading ripper OwO, time to extract it ");
+
+                        ZipFile.ExtractToDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\" + $"{fileName}.zip", AppDomain.CurrentDomain.BaseDirectory + @"\Mods\" + $"{fileName}" + @"\");
+                        MelonLogger.Msg(ConsoleColor.Green, "OwO Extracted ripper to" + " " + AppDomain.CurrentDomain.BaseDirectory + @"\Mods\" + $"{fileName}");
+
+
+                    }
+                    catch (Exception e3)
+                    {
+                        MelonLogger.Msg(ConsoleColor.Red, e3.Message);
+                    }
             }
-
-            if (e.Error != null)
-            {
-                MelonLogger.Msg(e.Error.ToString());
-            }
-            else
-            {
-                MelonLogger.Msg("Done downloading ripper OwO, time to extract it ");
-
-                ZipFile.ExtractToDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\" + $"{fileName}.zip", AppDomain.CurrentDomain.BaseDirectory + @"\Mods\" + $"{fileName}" + @"\");
-                MelonLogger.Msg(ConsoleColor.Green, "OwO Extracted ripper to" + " " + AppDomain.CurrentDomain.BaseDirectory + @"\Mods\" + $"{fileName}");
-
-
-            }
+               
 
         }
 
@@ -71,7 +85,7 @@ namespace SimpleAvatarInfo.ripper
         {
 
             MelonLogger.Msg(ConsoleColor.DarkMagenta, "Starting to run Ripper Command");
-            var baseCommand = ".\\AssetRipperConsole.exe" + $"{filenames}" + " " + "--output" + $"{outputdir}" + $"{filenames}";
+            var baseCommand = ".\\AssetRipperConsole.exe" +" "+ $"{filenames}" + " " + "--output" +" "+ $"{outputdir}" + $"{filenames}";
 
             MelonLogger.Msg("command thats going to be ran is" + $"{baseCommand}");
 
