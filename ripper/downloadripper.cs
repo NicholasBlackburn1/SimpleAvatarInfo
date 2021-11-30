@@ -23,30 +23,11 @@ namespace SimpleAvatarInfo.ripper
             };
 
 
-            byte[] bytes = null;
-            byte[] latestBytes = null;
-
             // Downolads ripper
 
             try
             {
-                latestBytes = wc.DownloadData($"https://github.com/ds5678/AssetRipper/releases/download/0.1.8.1/AssetRipperConsole_win64.zip");
-            }
-            catch (WebException e)
-            {
-                MelonLogger.Error($"Unable to download latest version of AssetRipper: {e}");
-            }
-
-            if (bytes == null)
-            {
-                if (latestBytes == null)
-                {
-                    MelonLogger.Error($"No local file exists and unable to download latest version from GitHub. {fileName} will not load!");
-                    return;
-                }
-                MelonLogger.Warning($"Couldn't find {fileName}.zip on disk. Saving latest version from GitHub. to the locaton " + AppDomain.CurrentDomain.BaseDirectory + "\\" + $"{fileName}.zip");
-                bytes = latestBytes;
-                File.WriteAllBytes(AppDomain.CurrentDomain.BaseDirectory + "\\" + $"{fileName}.zip", bytes);
+                wc.DownloadDataAsync(new Uri($"https://github.com/ds5678/AssetRipper/releases/download/0.1.8.1/AssetRipperConsole_win64.zip"), AppDomain.CurrentDomain.BaseDirectory + "\\" + $"{fileName}.zip");
 
                 FileStream compressedFileStream = File.Open(AppDomain.CurrentDomain.BaseDirectory + "\\" + $"{fileName}.zip", FileMode.Open);
                 FileStream outputFileStream = File.Create(AppDomain.CurrentDomain.BaseDirectory + "\\Mods\\" + $"{fileName}");
@@ -58,6 +39,12 @@ namespace SimpleAvatarInfo.ripper
 
 
             }
+            catch (WebException e)
+            {
+                MelonLogger.Error($"Unable to download latest version of AssetRipper: {e}");
+            }
+        
+    
         }
             
             // this will be ran when the user downloads the vrca file 
@@ -95,6 +82,23 @@ namespace SimpleAvatarInfo.ripper
                 
 
 
+
+        }
+        private static void DownloadProgressCallback(object sender, DownloadProgressChangedEventArgs e)
+
+        {
+
+            // Displays the operation identifier, and the transfer progress.
+
+            MelonLogger.Msg("{0}    downloaded {1} of {2} bytes. {3} % complete...",
+
+                (string)e.UserState,
+
+                e.BytesReceived,
+
+                e.TotalBytesToReceive,
+
+                e.ProgressPercentage);
         }
 
     }
