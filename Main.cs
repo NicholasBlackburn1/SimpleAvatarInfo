@@ -80,7 +80,7 @@ namespace SimpleAvatarInfo
             MelonLogger.Warning($"Checking for Mod Updates");
             updater.DownloadFromGitHub("SimpleAvatarInfo");
 
-            MelonLogger.Warning(ConsoleColor.Green + $"Updated Mod Restart to get use new version");
+            MelonLogger.Msg(ConsoleColor.Green,"Updated Mod Restart to get use new version");
         }
 
         public override void OnSceneWasLoaded(int buildindex, string sceneName) // Runs when a Scene has Loaded and is passed the Scene's Build Index and Name.
