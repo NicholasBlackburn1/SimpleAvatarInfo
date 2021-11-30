@@ -46,6 +46,7 @@ namespace SimpleAvatarInfo
         public static MelonPreferences_Category settingsCategory;
         public static MelonPreferences_Entry<string> downloadpath;
 
+
         public override void OnApplicationStart() // Runs after Game Initialization.
         {
 
@@ -177,6 +178,12 @@ namespace SimpleAvatarInfo
             MelonCoroutines.Start(gui.OnAvatarCloneButtonPress(SimpleAvatarInfo.downloadpath.Value));
             MelonCoroutines.Start(gui.OnSetAvatarPathButtonPress());
 
+
+        }
+
+
+        public void UpdateClient()
+        {
 
         }
 
