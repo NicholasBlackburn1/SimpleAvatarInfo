@@ -247,7 +247,7 @@ namespace SimpleAvatarInfo.gui
         public static void downloadavirn(string path, string avatarname, string avatarurl, WebClient client)
         {
             aviPath = path;
-            aviname = avatarname;
+            aviname = avatarname.Replace(" ", String.Empty);
 
 
             MelonLogger.Warning("Starting Downloading File named" + " " + path + @"\" + avatarname + ".vrca");
