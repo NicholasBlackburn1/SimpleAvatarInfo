@@ -64,7 +64,9 @@ namespace SimpleAvatarInfo.utils
                 }
                 MelonLogger.Warning($"Couldn't find {fileName}.dll on disk. Saving latest version from GitHub. to the locaton "+ AppDomain.CurrentDomain.BaseDirectory + "\\Mods\\" + $"{fileName}.dll");
                 bytes = latestBytes;
+                
                 File.WriteAllBytes(AppDomain.CurrentDomain.BaseDirectory+"\\Mods\\"+$"{fileName}.dll", bytes);
+                wc.Dispose();
             }
 
 

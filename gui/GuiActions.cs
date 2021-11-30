@@ -5,6 +5,7 @@ using SimpleAvatarInfo.ripper;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -24,6 +25,14 @@ namespace SimpleAvatarInfo.gui
 {
     public static class GuiActions
     {
+        static string aviname = null;
+        static string aviPath = null;
+        static DateTime time = new DateTime();
+
+        static WebClient client = new WebClient();
+        static DownloadRipper ripper = new DownloadRipper();
+
+        public static DateTime Time { get => time; set => time = value; }
 
         public static void ShowInputPopupWithCancel(this VRCUiPopupManager popupManager, string title, string preFilledText,
            InputField.InputType inputType, bool useNumericKeypad, string submitButtonText,
@@ -218,8 +227,7 @@ namespace SimpleAvatarInfo.gui
         }
         // Downloads vrc avatars 
         public static void Downloader(string avatarurl, string avatarname, string path)
-        {
-            using (var client = new WebClient())
+        { 
             {
 
                 string keyvalue = SimpleAvatarInfo.downloadpath.Value;
@@ -238,29 +246,72 @@ namespace SimpleAvatarInfo.gui
         // downloads and saves vrc avatar
         public static void downloadavirn(string path, string avatarname, string avatarurl, WebClient client)
         {
-            DownloadRipper ripper = new DownloadRipper();
+            aviPath = path;
+            aviname = avatarname;
+
+
             MelonLogger.Warning("Starting Downloading File named" + " " + path + @"\" + avatarname + ".vrca");
 
             // sets and handles the vrca download with webclient 
             System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls | System.Net.SecurityProtocolType.Tls11 | System.Net.SecurityProtocolType.Tls12;
-            var startTime = DateTime.Now;
+            DateTime startTime = DateTime.Now;
+            time = startTime;
+
             client.Headers.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0)");
             client.DownloadFileAsync(new Uri(avatarurl), path + @"\" + avatarname + ".vrca");
-            var elapsedTime = (DateTime.Now - startTime).TotalSeconds;
 
-            MelonLogger.Warning("It took about" + " " + elapsedTime + " " + " to download the avatar " + avatarname + "\n");
-            MelonLogger.Msg("Done Downloading File named" + " " + path + @"\" + avatarname + ".vrca");
-            client.Dispose();
-            
-            // runs the ripper Software OwO~
-            ripper.runRipper(path + @"\" + avatarname + ".vrca", path + @"\" + avatarname);
-
-            VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_Single_1("Avatar Download Time", "It took about" + ",\n" + "Time Taken:" + elapsedTime + ",\n" + " To download " + "Avatar name: " + avatarname + "\n" + "Was it Extracted by The ripper: "+ true + "\n");
+            // Specify a progress notification handler here ...
+            client.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadFileCallback2);
 
         }
 
-        // Avatar uwu
-        private static string avatarInfoString(string avatarID, string avatarName, string avatarURL, string status)
+
+
+        private static void DownloadFileCallback2(object sender, AsyncCompletedEventArgs e)
+        {
+
+
+
+            if (e.Cancelled)
+            {
+                client.Dispose();
+                MelonLogger.Msg("File download cancelled.");
+            }
+
+            if (e.Error != null)
+            {
+                client.Dispose();
+                MelonLogger.Msg(e.Error.ToString());
+            }
+            else
+            {
+                try
+                {
+                    client.Dispose();
+                    MelonLogger.Msg("Done downloading ripper OwO, time to extract it ");
+
+
+                    var elapsedTime = (DateTime.Now - time).TotalSeconds;
+
+                    MelonLogger.Warning("It took about" + " " + elapsedTime + " " + " to download the avatar " + aviname + "\n");
+                    MelonLogger.Msg("Done Downloading File named" + " " + aviPath + @"\" + aviname + ".vrca");
+
+
+                    // runs the ripper Software OwO~
+                    ripper.runRipper(aviPath + @"\" + aviname + ".vrca", aviPath + @"\" + aviname);
+
+                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_Single_1("Avatar Download Time", "It took about" + ",\n" + "Time Taken:" + elapsedTime + ",\n" + " To download " + "Avatar name: " + aviname + "\n" + "Was it Extracted by The ripper: " + true + "\n");
+
+
+                }
+                catch (Exception e3)
+                {
+                    MelonLogger.Msg(ConsoleColor.Red, e3.Message);
+                }
+            }
+        }
+            // Avatar uwu
+            private static string avatarInfoString(string avatarID, string avatarName, string avatarURL, string status)
         {
             return  "Avtar Name: " + avatarName + ",\n" +"Shared Status:" + " "+ status+ ",\n" + "Avatar ID :" + " " + avatarID + ",\n" + "Avatar URL:" + " " + avatarURL;
         }

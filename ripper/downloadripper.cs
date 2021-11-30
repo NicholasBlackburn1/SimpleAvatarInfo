@@ -9,19 +9,19 @@ namespace SimpleAvatarInfo.ripper
 {
     class DownloadRipper
     {
-
-        public void downloadRipper()
+        static WebClient wc = new WebClient
         {
-            MelonLogger.Msg(ConsoleColor.Magenta, "OwO Downloading ripper console....");
-            string fileName = "AssetRipperConsole_win64";
-            var wc = new WebClient
-            {
-                Headers =
+            Headers =
                 {
                     ["User-Agent"] =
                         "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0"
                 }
-            };
+        };
+        public void downloadRipper()
+        {
+            MelonLogger.Msg(ConsoleColor.Magenta, "OwO Downloading ripper console....");
+            string fileName = "AssetRipperConsole_win64";
+      
             try
             {
 
@@ -48,17 +48,20 @@ namespace SimpleAvatarInfo.ripper
            
                 if (e.Cancelled)
                 {
-                    MelonLogger.Msg("File download cancelled.");
+                wc.Dispose();
+                MelonLogger.Msg("File download cancelled.");
                 }
 
                 if (e.Error != null)
                 {
-                    MelonLogger.Msg(e.Error.ToString());
+                wc.Dispose();
+                MelonLogger.Msg(e.Error.ToString());
                 }
                 else
                 {
                 try
                     {
+                        wc.Dispose();
                         MelonLogger.Msg("Done downloading ripper OwO, time to extract it ");
 
                         ZipFile.ExtractToDirectory(AppDomain.CurrentDomain.BaseDirectory + "\\" + $"{fileName}.zip", AppDomain.CurrentDomain.BaseDirectory + @"\Mods\" + $"{fileName}" + @"\");
