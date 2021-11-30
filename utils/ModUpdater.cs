@@ -24,10 +24,10 @@ namespace SimpleAvatarInfo.utils
         }
 
         // downloads and updated the mod from gethub
-        private void DownloadFromGitHub(string fileName)
+        public void DownloadFromGitHub(string fileName)
         {
 
-            MelonLogger.Warning("Path for Updated Mod is at$"+AppDomain.CurrentDomain.BaseDirectory + "\\mods\\" + $"{fileName}.dll");
+            MelonLogger.Warning("Path for Updated Mod is at"+AppDomain.CurrentDomain.BaseDirectory + "\\mods\\" + "{fileName}.dll");
              var sha256 = SHA256.Create();
 
             byte[] bytes = null;

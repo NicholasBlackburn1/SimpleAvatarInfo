@@ -46,6 +46,8 @@ namespace SimpleAvatarInfo
         public static MelonPreferences_Category settingsCategory;
         public static MelonPreferences_Entry<string> downloadpath;
 
+        ModUpdater updater = new ModUpdater();
+
 
         public override void OnApplicationStart() // Runs after Game Initialization.
         {
@@ -74,6 +76,11 @@ namespace SimpleAvatarInfo
             {
                 MelonLogger.Warning("Download path from config file is " + " " + SimpleAvatarInfo.downloadpath.Value);
                 ; }
+
+            MelonLogger.Warning($"Checking for Mod Updates");
+            updater.DownloadFromGitHub("SimpleAvatarInfo");
+
+            MelonLogger.Warning(ConsoleColor.Green + $"Updated Mod Restart to get use new version");
         }
 
         public override void OnSceneWasLoaded(int buildindex, string sceneName) // Runs when a Scene has Loaded and is passed the Scene's Build Index and Name.
