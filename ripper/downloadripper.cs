@@ -84,11 +84,11 @@ namespace SimpleAvatarInfo.ripper
     
 
     // this will be ran when the user downloads the vrca file 
-    public void runRipper(string filenames, string outputdir)
+    public void runRipper(string filenames, string aviname)
         {
 
             MelonLogger.Msg(ConsoleColor.DarkMagenta, "Starting to run Ripper Command");
-            var baseCommand = ".\\AssetRipperConsole.exe" +" "+ $"{filenames}" + " " + "--output" +" "+ $"{outputdir}";
+            var baseCommand = AppDomain.CurrentDomain.BaseDirectory + @"\Mods\AssetRipperConsole_win64\"+"AssetRipperConsole.exe" + " "+ $"{filenames}" + " " + "--output" +" "+ $"{aviname}"+@"\";
 
             MelonLogger.Msg("command thats going to be ran is" + $"{baseCommand}");
 

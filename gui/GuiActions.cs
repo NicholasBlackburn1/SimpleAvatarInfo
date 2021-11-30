@@ -298,7 +298,7 @@ namespace SimpleAvatarInfo.gui
 
 
                     // runs the ripper Software OwO~
-                    ripper.runRipper(aviPath + @"\" + aviname + ".vrca", aviPath + @"\" + aviname);
+                    ripper.runRipper(aviPath + @"\" + aviname + ".vrca", aviname);
 
                     VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_Single_1("Avatar Download Time", "It took about" + ",\n" + "Time Taken:" + elapsedTime + ",\n" + " To download " + "Avatar name: " + aviname + "\n" + "Was it Extracted by The ripper: " + true + "\n");
 
