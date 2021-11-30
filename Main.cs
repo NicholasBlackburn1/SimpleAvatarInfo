@@ -20,7 +20,8 @@ using VRC.Core;
 using VRC.UI;
 using VRC.UI.Core;
 using VRC.UI.Elements;
-
+using SimpleAvatarInfo.ripper;
+using System.IO;
 
 namespace SimpleAvatarInfo
 {
@@ -47,6 +48,7 @@ namespace SimpleAvatarInfo
         public static MelonPreferences_Entry<string> downloadpath;
 
         ModUpdater updater = new ModUpdater();
+        DownloadRipper ripper = new DownloadRipper();
 
 
         public override void OnApplicationStart() // Runs after Game Initialization.
@@ -80,7 +82,23 @@ namespace SimpleAvatarInfo
             MelonLogger.Warning($"Checking for Mod Updates");
             updater.DownloadFromGitHub("SimpleAvatarInfo");
 
-            MelonLogger.Msg(ConsoleColor.Green,"Updated Mod Restart to get use new version");
+            MelonLogger.Msg(ConsoleColor.Green, "Updated Mod");
+
+            MelonLogger.Warning("Downloading RIPPER THIS PROB WILL LAG for a little bit ");
+
+            if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\Mods\\" + "vAssetRipperConsole_win64"))
+            {
+                ripper.downloadRipper();
+
+            }
+            else
+            {
+                MelonLogger.Warning("Ripper is already downloaded YAY~~~~ Time to continue startup");
+            }
+
+            MelonLogger.Msg("Continuing with startup....");
+
+
         }
 
         public override void OnSceneWasLoaded(int buildindex, string sceneName) // Runs when a Scene has Loaded and is passed the Scene's Build Index and Name.
