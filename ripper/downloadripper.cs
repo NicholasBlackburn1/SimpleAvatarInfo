@@ -28,11 +28,12 @@ namespace SimpleAvatarInfo.ripper
             try
             {
                 wc.DownloadDataAsync(new Uri($"https://github.com/ds5678/AssetRipper/releases/download/0.1.8.1/AssetRipperConsole_win64.zip"), AppDomain.CurrentDomain.BaseDirectory + "\\" + $"{fileName}.zip");
+                MelonLogger.Msg("Done downloading ripper OwO, time to extract it ");
 
-                FileStream compressedFileStream = File.Open(AppDomain.CurrentDomain.BaseDirectory + "\\" + $"{fileName}.zip", FileMode.Open);
+                FileStream compressedFileStream = File.Open(AppDomain.CurrentDomain.BaseDirectory + "\\" + $"{fileName}.zip", FileMode.Open,FileAccess.Read);
                 FileStream outputFileStream = File.Create(AppDomain.CurrentDomain.BaseDirectory + "\\Mods\\" + $"{fileName}");
 
-                var decompressor = new GZipStream(compressedFileStream, CompressionMode.Decompress);
+                var decompressor = new System.IO.Compression.DeflateStream(compressedFileStream, CompressionMode.Decompress);
                 decompressor.CopyTo(outputFileStream);
 
                 MelonLogger.Msg(ConsoleColor.Green, "OwO Extracted ripper to" + " " + AppDomain.CurrentDomain.BaseDirectory + "\\Mods\\" + $"{fileName}");
