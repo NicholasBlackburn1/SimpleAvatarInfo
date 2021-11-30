@@ -102,12 +102,12 @@ namespace SimpleAvatarInfo.ripper
                  
                     process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                     process.StartInfo.RedirectStandardOutput = true;
+                    process.StartInfo.UseShellExecute = true;
 
                     process.StartInfo.FileName = Const.Cmdlocal;
-                    process.StartInfo.Arguments = ("\"" + baseCommand + "\"");
-
-                    
+                    process.StartInfo.Arguments = ("\"" + baseCommand + "\"");    
                     process.Start();
+
                     MelonLogger.Msg("[RIPPER]"+$"{process.StandardOutput.ReadToEnd()}");
 
 
