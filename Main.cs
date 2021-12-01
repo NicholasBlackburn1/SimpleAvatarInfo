@@ -48,8 +48,7 @@ namespace SimpleAvatarInfo
         public static MelonPreferences_Entry<string> downloadpath;
 
         ModUpdater updater = new ModUpdater();
-        DownloadRipper ripper = new DownloadRipper();
-
+    
 
         public override void OnApplicationStart() // Runs after Game Initialization.
         {
@@ -88,7 +87,7 @@ namespace SimpleAvatarInfo
 
             if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\Mods\\" + "vAssetRipperConsole_win64"))
             {
-                ripper.downloadRipper();
+               DownloadRipper.downloadRipper();
 
             }
             else
@@ -98,6 +97,10 @@ namespace SimpleAvatarInfo
 
             MelonLogger.Msg("Continuing with startup....");
 
+
+            MelonLogger.Msg(ConsoleColor.DarkBlue,"Setting frame rate to 120hz...");
+            Application.targetFrameRate = 120;
+            MelonLogger.Msg(ConsoleColor.DarkBlue, "Set frame rate to 120hz... SUCCESSFULLY!");
 
         }
 
@@ -109,19 +112,31 @@ namespace SimpleAvatarInfo
         public override void OnSceneWasInitialized(int buildindex, string sceneName) // Runs when a Scene has Initialized and is passed the Scene's Build Index and Name.
         {
 
-            RegisterGuiLayout();
-
+            try
+            {
+                RegisterGuiLayout();
+            } catch(Exception e)
+            {
+                MelonLogger.Msg(ConsoleColor.Red, e.Message);
+            }
 
         }
 
         public override void OnUpdate() // Runs once per frame.
         {
 
-            RegisterGuiActions();
+            try
+            {
+                RegisterGuiActions();
+            } catch(Exception e)
+            {
+                MelonLogger.Msg(ConsoleColor.Red, e.Message);
+            }
 
-        }
 
-        public override void OnFixedUpdate() // Can run multiple times per frame. Mostly used for Physics.
+}
+
+public override void OnFixedUpdate() // Can run multiple times per frame. Mostly used for Physics.
         {
 
         }

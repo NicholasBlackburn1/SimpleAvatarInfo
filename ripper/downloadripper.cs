@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.IO.Compression;
 using System.Net;
+using System.Threading;
 
 namespace SimpleAvatarInfo.ripper
 {
@@ -17,7 +18,7 @@ namespace SimpleAvatarInfo.ripper
                         "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:87.0) Gecko/20100101 Firefox/87.0"
                 }
         };
-        public void downloadRipper()
+        public static void downloadRipper()
         {
             MelonLogger.Msg(ConsoleColor.Magenta, "OwO Downloading ripper console....");
             string fileName = "AssetRipperConsole_win64";
@@ -79,36 +80,49 @@ namespace SimpleAvatarInfo.ripper
         }
 
 
-
+        
 
     
 
     // this will be ran when the user downloads the vrca file 
-    public void runRipper(string filenames, string aviname)
+    public  void runRipper(string filenames, string aviname)
         {
 
             MelonLogger.Msg(ConsoleColor.DarkMagenta, "Starting to run Ripper Command");
-            var baseCommand = AppDomain.CurrentDomain.BaseDirectory + @"\Mods\AssetRipperConsole_win64\"+"AssetRipperConsole.exe" + " "+ $"{filenames}" + " " + "--output" +" "+ $"{aviname}";
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
-            MelonLogger.Msg("command thats going to be ran is" + $"{baseCommand}");
+            MelonLogger.Msg("command thats going to be ran is " + AppDomain.CurrentDomain.BaseDirectory + @"\Mods\AssetRipperConsole_win64\" + "AssetRipperConsole.exe" + " " + $"{filenames}" + " " + "--output" + " " + $"{aviname}");
+            ;
 
-                // this will only run if the ripper is there 
-                if(Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\Mods\\" + "AssetRipperConsole_win64"))
+            // this will only run if the ripper is there 
+            if (Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\Mods\AssetRipperConsole_win64"))
                 {
 
                     MelonLogger.Warning("Ripping avatar files from" + $"{filenames}");
-                    System.Diagnostics.Process process = new System.Diagnostics.Process();
-            
-                 
-                    process.StartInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                    process.StartInfo.RedirectStandardOutput = true;
-                    process.StartInfo.UseShellExecute = true;
 
-                    process.StartInfo.FileName = Const.Cmdlocal;
-                    process.StartInfo.Arguments = ("\"" + baseCommand + "\"");    
+
+                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                startInfo.FileName = Const.Cmdlocal;
+                startInfo.Arguments = AppDomain.CurrentDomain.BaseDirectory + @"\Mods\AssetRipperConsole_win64\" + "AssetRipperConsole.exe" + " " + $"{filenames}" + " " + "--output" + " " + $"{aviname}"+ " "+"--verbose";
+                startInfo.RedirectStandardOutput = true;
+                startInfo.UseShellExecute = false;
+
+                process.StartInfo = startInfo;
+
+                MelonLogger.Msg(ConsoleColor.DarkBlue, "Starting to run ripper in console...");
+                try
+                {
                     process.Start();
+                    MelonLogger.Warning(process.StandardOutput.ReadToEnd());
+                }catch(Exception e)
+                {
+                    MelonLogger.Msg(ConsoleColor.DarkRed, e.Message);
+                }
 
-                    MelonLogger.Msg("[RIPPER]"+$"{process.StandardOutput.ReadToEnd()}");
+
+         
+
 
 
             }
@@ -116,7 +130,7 @@ namespace SimpleAvatarInfo.ripper
             {
                 downloadRipper();
                 MelonLogger.Msg("Time to Return back to the menu");
-                return;
+                
             }
                 
 

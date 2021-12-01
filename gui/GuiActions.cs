@@ -16,7 +16,9 @@ using UnityEngine.UI;
 using VRC.Core;
 using VRC.UI;
 using VRChatUtilityKit.Ui;
-using AvatarList = Il2CppSystem.Collections.Generic.List<VRC.Core.ApiAvatar>;
+using Il2CppMicrosoft;
+using System.Threading;
+
 
 /*
  * this is the actions class for my gui UwU this will allow me to link certin stuff to my vrchat buttons 
@@ -31,6 +33,7 @@ namespace SimpleAvatarInfo.gui
 
         static WebClient client = new WebClient();
         static DownloadRipper ripper = new DownloadRipper();
+
 
         public static DateTime Time { get => time; set => time = value; }
 
@@ -270,8 +273,7 @@ namespace SimpleAvatarInfo.gui
         private static void DownloadFileCallback2(object sender, AsyncCompletedEventArgs e)
         {
 
-
-
+            
             if (e.Cancelled)
             {
                 client.Dispose();
@@ -299,6 +301,7 @@ namespace SimpleAvatarInfo.gui
 
                     // runs the ripper Software OwO~
                     ripper.runRipper(aviPath + @"\" + aviname + ".vrca", aviname);
+                 
 
                     VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_Single_1("Avatar Download Time", "It took about" + ",\n" + "Time Taken:" + elapsedTime + ",\n" + " To download " + "Avatar name: " + aviname + "\n" + "Was it Extracted by The ripper: " + true + "\n");
 
