@@ -85,7 +85,7 @@ namespace SimpleAvatarInfo.ripper
     
 
     // this will be ran when the user downloads the vrca file 
-    public IEnumerator RunRipper(string filenames, string aviname)
+    public void RunRipper(string filenames, string aviname)
         {
 
             MelonLogger.Msg(ConsoleColor.DarkMagenta, "Starting to run Ripper Command");
