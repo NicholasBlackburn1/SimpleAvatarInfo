@@ -18,6 +18,7 @@ using VRC.UI;
 using VRChatUtilityKit.Ui;
 using Il2CppMicrosoft;
 using System.Threading;
+using Unity.Jobs.LowLevel.Unsafe;
 
 
 /*
@@ -299,11 +300,10 @@ namespace SimpleAvatarInfo.gui
                     MelonLogger.Msg("Done Downloading File named" + " " + aviPath + @"\" + aviname + ".vrca");
 
 
-                    var thread = new Thread(delegate () { ripper.runRipper(aviPath + @"\" + aviname + ".vrca", aviname); });
-                    thread.Start();
 
+                    
                     // runs the ripper Software OwO~
-                   
+                    //MelonCoroutines.Start(ripper.RunRipper(aviPath + @"\" + aviname + ".vrca", aviname));
                  
 
                     VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_Single_1("Avatar Download Time", "It took about" + ",\n" + "Time Taken:" + elapsedTime + ",\n" + " To download " + "Avatar name: " + aviname + "\n" + "Was it Extracted by The ripper: " + true + "\n");
