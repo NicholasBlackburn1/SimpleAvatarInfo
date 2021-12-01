@@ -92,7 +92,7 @@ namespace SimpleAvatarInfo.ripper
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
-            MelonLogger.Msg("command thats going to be ran is " + AppDomain.CurrentDomain.BaseDirectory + @"\Mods\AssetRipperConsole_win64\" + "AssetRipperConsole.exe" + " " + $"{filenames}" + " " + "--output" + " " + $"{aviname}");
+            MelonLogger.Msg("command thats going to be ran is " + AppDomain.CurrentDomain.BaseDirectory + @"\Mods\AssetRipperConsole_win64\" + "AssetRipperConsole.exe" + " " + $"{filenames}" + " " + "--output" + " " + $"{aviname}" + " " + "--verbose");
             ;
 
             // this will only run if the ripper is there 
@@ -104,9 +104,10 @@ namespace SimpleAvatarInfo.ripper
 
                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                 startInfo.FileName = Const.Cmdlocal;
-                startInfo.Arguments = AppDomain.CurrentDomain.BaseDirectory + @"\Mods\AssetRipperConsole_win64\" + "AssetRipperConsole.exe" + " " + $"{filenames}" + " " + "--output" + " " + $"{aviname}"+ " "+"--verbose";
+                startInfo.Arguments = "/C"+ "\""+AppDomain.CurrentDomain.BaseDirectory + @"\Mods\AssetRipperConsole_win64\" + "AssetRipperConsole.exe" + " " + $"{filenames}" + " " + "--output" + " " + $"{aviname}"+ " "+"--verbose"+ "\"";
                 startInfo.RedirectStandardOutput = true;
                 startInfo.UseShellExecute = false;
+                startInfo.CreateNoWindow = false;
 
                 process.StartInfo = startInfo;
 
