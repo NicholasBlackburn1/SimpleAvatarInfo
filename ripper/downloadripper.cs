@@ -116,6 +116,7 @@ namespace SimpleAvatarInfo.ripper
                 {
                     process.Start();
                     MelonLogger.Warning(process.StandardOutput.ReadToEnd());
+                    process.WaitForExit();
                 }catch(Exception e)
                 {
                     MelonLogger.Msg(ConsoleColor.DarkRed, e.Message);
