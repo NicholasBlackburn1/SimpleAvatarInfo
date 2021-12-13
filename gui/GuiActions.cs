@@ -128,30 +128,18 @@ namespace SimpleAvatarInfo.gui
                     avatarPage.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar { id = avatarID };
                     DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Private");
 
-                    // Warning message for cloning a private avatar
-                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Avatar Info!", avatarInfoString(avatarID, avatarName, avatarURL, "Private"), "Download Avatar ", new Action(() =>
-                    {
-                        MelonLogger.Msg("Downloading avatar..");
-                        Downloader(avatarURL, avatarName, downloadlocal);
-
-                    }), null);
+                    // Shows avatar info in a nice popup
+                    AvatarInfoPopUp(avatarInfoString(avatarID, avatarName, avatarURL, "Private"), avatarURL, avatarName, downloadlocal);
 
                 }
                 else
                 {
 
                     avatarPage.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar { id = avatarID };
-
+                      
                     DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Public");
-
-                    // Warning message for cloning a private avatar
-                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Avatar Info!", avatarInfoString(avatarID,avatarName,avatarURL, "Public"), "Download Avatar", new Action(() =>
-                    {
-                        MelonLogger.Msg("Downloading avatar...");
-                        Downloader(avatarURL, avatarName, downloadlocal);
-
-
-                    }), null);
+                    // Shows avatar info in a nice popup
+                    AvatarInfoPopUp(avatarInfoString(avatarID, avatarName, avatarURL, "Public"), avatarURL, avatarName, downloadlocal);
 
                 }
 
@@ -161,6 +149,17 @@ namespace SimpleAvatarInfo.gui
 
         }
 
+        // this allows me to create popups in one place without repeting the smae function
+        public static void AvatarInfoPopUp(string avatarinfo, string avatarURL, string avatarName, string downloadlocal)
+        {
+            // Warning message for cloning a private avatar
+            VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_2("Avatar Info!", avatarinfo, "Download Avatar ", new Action(() =>
+            {
+                MelonLogger.Msg("Downloading avatar..");
+                Downloader(avatarURL, avatarName, downloadlocal);
+
+            }), null);
+        }
 
         public static Action changFileLocal()
         {
