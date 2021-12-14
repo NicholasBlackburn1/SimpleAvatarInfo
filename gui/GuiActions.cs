@@ -238,7 +238,7 @@ namespace SimpleAvatarInfo.gui
 
  
 
-                downloadavirn(path, avatarname, avatarurl, client);
+                //downloadavirn(path, avatarname, avatarurl, client);
 
                 
             }
@@ -291,7 +291,10 @@ namespace SimpleAvatarInfo.gui
             MelonLogger.Warning("It took about" + " " + elapsedTime + " " + " to download the avatar " + aviname + "\n");
             MelonLogger.Msg("Done Downloading File named" + " " + aviPath + @"\" + aviname + ".vrca");
 
-             
+               
+            //VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_Single_1("Avatar Download Time", "It took about" + ",\n" + "Time Taken:" + elapsedTime +  "\n");
+            
+
              
         }
             // Avatar uwu
