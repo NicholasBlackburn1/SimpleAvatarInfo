@@ -261,7 +261,7 @@ namespace SimpleAvatarInfo.gui
             time = startTime;
 
             client.Headers.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0)");
-            client.DownloadFile(avatarurl, path + @"\" + avatarname + ".vrca");
+            client.DownloadFileAsync(new Uri(avatarurl), path + @"\" + avatarname + ".vrca");
 
             // Specify a progress notification handler here ...
             client.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadFileCallback2);
@@ -285,26 +285,26 @@ namespace SimpleAvatarInfo.gui
                 client.Dispose();
                 MelonLogger.Msg(e.Error.ToString());
             }
-            else
-            {
+           
                 try
                 {
                    
+            
                     var elapsedTime = (DateTime.Now - time).TotalSeconds;
 
                     MelonLogger.Warning("It took about" + " " + elapsedTime + " " + " to download the avatar " + aviname + "\n");
                     MelonLogger.Msg("Done Downloading File named" + " " + aviPath + @"\" + aviname + ".vrca");
 
-
+               
                     VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_Single_1("Avatar Download Time", "It took about" + ",\n" + "Time Taken:" + elapsedTime + ",\n" + " To download " + "Avatar name: " + aviname + "\n" + "Was it Extracted by The ripper: " + true + "\n");
-
+                   
 
                 }
                 catch (Exception e3)
                 {
                     MelonLogger.Msg(ConsoleColor.Red, e3.Message);
                 }
-            }
+            
         }
             // Avatar uwu
             private static string avatarInfoString(string avatarID, string avatarName, string avatarURL, string status)
