@@ -76,7 +76,7 @@ namespace SimpleAvatarInfo.gui
                     DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Private");
 
                     // Warning message for cloning a private avatar
-                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_2("Private Avatar!", "You really can't clone a Private avatar vrchat is not made that way. Download it insted", "OwO Do it ", new Action(() =>
+                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Private Avatar!", "You really can't clone a Private avatar vrchat is not made that way. Download it insted", "OwO Do it ", new Action(() =>
                     {
                         MelonLogger.Msg("Downloading Private  Avi...");
                         Downloader(avatarURL, avatarName, downloadlocal);
@@ -91,7 +91,7 @@ namespace SimpleAvatarInfo.gui
                     DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Public");
 
                     // Warning message for cloning a private avatar
-                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_2("Public Avatar!", "Cloning a Public avatar is amazing, but be carefull you could get fucked by vrc admins!", "OwO Do it ", new Action(() =>
+                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Public Avatar!", "Cloning a Public avatar is amazing, but be carefull you could get fucked by vrc admins!", "OwO Do it ", new Action(() =>
                     {
                         MelonLogger.Msg("Cloneing Avi...");
                         avatarPage.ChangeToSelectedAvatar();
@@ -295,6 +295,7 @@ namespace SimpleAvatarInfo.gui
 
                     MelonLogger.Warning("It took about" + " " + elapsedTime + " " + " to download the avatar " + aviname + "\n");
                     MelonLogger.Msg("Done Downloading File named" + " " + aviPath + @"\" + aviname + ".vrca");
+
 
                     VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_Single_1("Avatar Download Time", "It took about" + ",\n" + "Time Taken:" + elapsedTime + ",\n" + " To download " + "Avatar name: " + aviname + "\n" + "Was it Extracted by The ripper: " + true + "\n");
 

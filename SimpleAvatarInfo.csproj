@@ -169,7 +169,6 @@
     <Compile Include="Const.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="gui\GuiActions.cs" />
-    <Compile Include="gui\ModGuiWindow.cs" />
     <Compile Include="gui\LeftWingMenu.cs" />
     <Compile Include="ripper\DownloadRipper.cs" />
     <Compile Include="utils\ModUpdater.cs" />

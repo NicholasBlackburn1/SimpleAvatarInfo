@@ -82,7 +82,7 @@ namespace SimpleAvatarInfo
            // updater.DownloadFromGitHub("SimpleAvatarInfo");
 
             MelonLogger.Msg(ConsoleColor.Green, "Updated Mod");
-
+/**
             MelonLogger.Warning("Downloading RIPPER THIS PROB WILL LAG for a little bit ");
 
             if (!Directory.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\Mods\\" + "vAssetRipperConsole_win64"))
@@ -94,6 +94,7 @@ namespace SimpleAvatarInfo
             {
                 MelonLogger.Warning("Ripper is already downloaded YAY~~~~ Time to continue startup");
             }
+**/
 
             MelonLogger.Msg("Continuing with startup....");
 
@@ -194,7 +195,7 @@ public override void OnFixedUpdate() // Can run multiple times per frame. Mostly
           
 
 
-            MelonCoroutines.Start(gui.OnMainTitleRun("text UwU~...."));
+            MelonCoroutines.Start(gui.OnMainTitleRun("Nicky's Mod Loaded.."));
             MelonCoroutines.Start(gui.OnLeftWingTitle("text In left wing~...."));
 
             // Wing Gui Button's 
