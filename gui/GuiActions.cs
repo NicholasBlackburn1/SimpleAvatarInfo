@@ -43,7 +43,7 @@ namespace SimpleAvatarInfo.gui
            Action<string, Il2CppSystem.Collections.Generic.List<KeyCode>, Text> submitButtonAction,
            Action cancelButtonAction, string placeholderText = "Enter text....")
         {
-            popupManager.Method_Public_Void_String_String_InputType_Boolean_String_Action_3_String_List_1_KeyCode_Text_Action_String_Boolean_Action_1_VRCUiPopup_Boolean_Int32_0(
+            popupManager.Method_Public_Void_String_String_InputType_Boolean_String_Action_3_String_List_1_KeyCode_Text_Action_String_Boolean_Action_1_VRCUiPopup_Boolean_Int32_1(
                     title,
                     preFilledText,
                     inputType, useNumericKeypad, submitButtonText, submitButtonAction, cancelButtonAction, placeholderText, true, null);
@@ -76,7 +76,7 @@ namespace SimpleAvatarInfo.gui
                     DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Private");
 
                     // Warning message for cloning a private avatar
-                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Private Avatar!", "You really can't clone a Private avatar vrchat is not made that way. Download it insted", "OwO Do it ", new Action(() =>
+                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_2("Private Avatar!", "You really can't clone a Private avatar vrchat is not made that way. Download it insted", "OwO Do it ", new Action(() =>
                     {
                         MelonLogger.Msg("Downloading Private  Avi...");
                         Downloader(avatarURL, avatarName, downloadlocal);
@@ -91,7 +91,7 @@ namespace SimpleAvatarInfo.gui
                     DisplayAvatarInfoInConsole(avatarID, avatarName, avatarURL, avatarVersion, "Public");
 
                     // Warning message for cloning a private avatar
-                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_0("Public Avatar!", "Cloning a Public avatar is amazing, but be carefull you could get fucked by vrc admins!", "OwO Do it ", new Action(() =>
+                    VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_String_Action_Action_1_VRCUiPopup_2("Public Avatar!", "Cloning a Public avatar is amazing, but be carefull you could get fucked by vrc admins!", "OwO Do it ", new Action(() =>
                     {
                         MelonLogger.Msg("Cloneing Avi...");
                         avatarPage.ChangeToSelectedAvatar();
@@ -205,7 +205,7 @@ namespace SimpleAvatarInfo.gui
             return new Action(() =>
             {
                 MelonLogger.Msg("-------MOD INFORMATION---------");
-                MelonLogger.Msg(" Version" + " " + "1.0.0");
+                MelonLogger.Msg(" Version" + " " + BuildInfo.Version);
 
                 VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_Single_1("Mod Info", modInfo());
 
@@ -238,7 +238,7 @@ namespace SimpleAvatarInfo.gui
 
  
 
-                //downloadavirn(path, avatarname, avatarurl, client);
+                downloadavirn(path, avatarname, avatarurl, client);
 
                 
             }
@@ -272,8 +272,9 @@ namespace SimpleAvatarInfo.gui
 
         private static void DownloadFileCallback2(object sender, AsyncCompletedEventArgs e)
         {
+            LeftWingMenu gui = new LeftWingMenu();
 
-            
+
             if (e.Cancelled)
             {
                 MelonLogger.Msg("File download cancelled.");
@@ -291,11 +292,7 @@ namespace SimpleAvatarInfo.gui
             MelonLogger.Warning("It took about" + " " + elapsedTime + " " + " to download the avatar " + aviname + "\n");
             MelonLogger.Msg("Done Downloading File named" + " " + aviPath + @"\" + aviname + ".vrca");
 
-               
-            //VRCUiPopupManager.prop_VRCUiPopupManager_0.Method_Public_Void_String_String_Single_1("Avatar Download Time", "It took about" + ",\n" + "Time Taken:" + elapsedTime +  "\n");
-            
 
-             
         }
             // Avatar uwu
             private static string avatarInfoString(string avatarID, string avatarName, string avatarURL, string status)
