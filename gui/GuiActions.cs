@@ -261,7 +261,7 @@ namespace SimpleAvatarInfo.gui
             time = startTime;
 
             client.Headers.Add("user-agent", "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0)");
-            client.DownloadFileAsync(new Uri(avatarurl), path + @"\" + avatarname + ".vrca");
+            client.DownloadFile(avatarurl, path + @"\" + avatarname + ".vrca");
 
             // Specify a progress notification handler here ...
             client.DownloadFileCompleted += new AsyncCompletedEventHandler(DownloadFileCallback2);
@@ -289,8 +289,7 @@ namespace SimpleAvatarInfo.gui
             {
                 try
                 {
-                    client.Dispose();
-            
+                   
                     var elapsedTime = (DateTime.Now - time).TotalSeconds;
 
                     MelonLogger.Warning("It took about" + " " + elapsedTime + " " + " to download the avatar " + aviname + "\n");
